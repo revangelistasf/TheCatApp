@@ -17,10 +17,11 @@ final class NetworkService: NetworkServiceProtocol {
             throw URLError(.badURL)
         }
         
-        let (data, _) = try await URLSession.shared.data(for: urlRequest)
+        let (data, urlResponse) = try await URLSession.shared.data(for: urlRequest)
+        try handle(urlResponse: urlResponse)
         return data
     }
-    
+
     private func makeRequest(_ endpoint: Endpoint) -> URLRequest? {
         var urlComponents = URLComponents()
         urlComponents.scheme = endpoint.scheme
@@ -35,5 +36,22 @@ final class NetworkService: NetworkServiceProtocol {
         request.httpMethod = endpoint.method.rawValue
         request.allHTTPHeaderFields = endpoint.header
         return request
+    }
+
+    private func handle(urlResponse: URLResponse) throws {
+        guard let httpUrlResponse = urlResponse as? HTTPURLResponse else {
+            throw URLError(.badServerResponse)
+        }
+
+        switch httpUrlResponse.statusCode {
+        case 200...299:
+            break
+        case 400...499:
+            throw NetworkError.clientError(httpUrlResponse.statusCode)
+        case 500...599:
+            throw NetworkError.serverError(httpUrlResponse.statusCode)
+        default:
+            throw NetworkError.generic(httpUrlResponse.statusCode)
+        }
     }
 }
