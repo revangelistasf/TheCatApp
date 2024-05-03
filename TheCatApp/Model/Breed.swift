@@ -13,5 +13,5 @@ struct Breed: Decodable {
     let description: String
     let origin: String
     let temperament: String
-    let referenceImageId: String
+    let referenceImageId: String?
 }

@@ -13,7 +13,7 @@ enum BreedEndpoint: Endpoint {
     var path: String  {
         switch self {
         case .breeds:
-            "/breeds"
+            "/v1/breeds"
         }
     }
 }
