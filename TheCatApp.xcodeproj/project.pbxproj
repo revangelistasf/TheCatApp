@@ -14,6 +14,7 @@
 		841D5BD72BE4F78700C5EAB1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BD62BE4F78700C5EAB1 /* NetworkService.swift */; };
 		841D5BD92BE5025C00C5EAB1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BD82BE5025C00C5EAB1 /* Endpoint.swift */; };
 		841D5BDB2BE510FE00C5EAB1 /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BDA2BE510FE00C5EAB1 /* RequestMethod.swift */; };
+		841D5BDF2BE5184C00C5EAB1 /* BreedEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BDE2BE5184C00C5EAB1 /* BreedEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		841D5BD62BE4F78700C5EAB1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		841D5BD82BE5025C00C5EAB1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		841D5BDA2BE510FE00C5EAB1 /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
+		841D5BDE2BE5184C00C5EAB1 /* BreedEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +59,9 @@
 		841D5BC52BE4E4BE00C5EAB1 /* TheCatApp */ = {
 			isa = PBXGroup;
 			children = (
-				841D5BD52BE4EB7900C5EAB1 /* Network */,
 				841D5BD42BE4EA3B00C5EAB1 /* Application */,
 				841D5BC82BE4E4BE00C5EAB1 /* ContentView.swift */,
+				841D5BD52BE4EB7900C5EAB1 /* Network */,
 				841D5BCC2BE4E4BF00C5EAB1 /* Preview Content */,
 			);
 			path = TheCatApp;
@@ -85,11 +87,20 @@
 		841D5BD52BE4EB7900C5EAB1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				841D5BDC2BE5182900C5EAB1 /* Endpoints */,
 				841D5BD62BE4F78700C5EAB1 /* NetworkService.swift */,
-				841D5BD82BE5025C00C5EAB1 /* Endpoint.swift */,
 				841D5BDA2BE510FE00C5EAB1 /* RequestMethod.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		841D5BDC2BE5182900C5EAB1 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				841D5BD82BE5025C00C5EAB1 /* Endpoint.swift */,
+				841D5BDE2BE5184C00C5EAB1 /* BreedEndpoint.swift */,
+			);
+			path = Endpoints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +177,7 @@
 				841D5BD72BE4F78700C5EAB1 /* NetworkService.swift in Sources */,
 				841D5BD92BE5025C00C5EAB1 /* Endpoint.swift in Sources */,
 				841D5BDB2BE510FE00C5EAB1 /* RequestMethod.swift in Sources */,
+				841D5BDF2BE5184C00C5EAB1 /* BreedEndpoint.swift in Sources */,
 				841D5BC72BE4E4BE00C5EAB1 /* TheCatAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
