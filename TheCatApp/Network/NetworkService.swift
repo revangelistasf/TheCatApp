@@ -27,7 +27,8 @@ final class NetworkService: NetworkServiceProtocol {
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
-        
+        urlComponents.queryItems = endpoint.queryItems
+
         guard let url = urlComponents.url else {
             return nil
         }
