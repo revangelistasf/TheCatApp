@@ -7,19 +7,20 @@
 
 import SwiftUI
 
-enum FavoriteType {
-    case small
-    case large
+enum FavoriteTypeStyle {
+    case innerCard
+    case details
 }
 
 struct FavoriteButton: View {
     @State var isFavorite: Bool
-    var favoriteType: FavoriteType = .small
+    var favoriteStyle: FavoriteTypeStyle = .innerCard
+
     var size: CGFloat {
-        switch favoriteType {
-        case .small:
+        switch favoriteStyle {
+        case .innerCard:
             return Constants.smallSize
-        case .large:
+        case .details:
             return Constants.largeSize
         }
     }
@@ -28,7 +29,7 @@ struct FavoriteButton: View {
         Button {
             isFavorite.toggle()
         } label: {
-            Label("add favorites", systemImage: Constants.imageName)
+            Label("add to favorites", systemImage: Constants.imageName)
                 .labelStyle(.iconOnly)
                 .foregroundStyle(isFavorite ? .red : .black)
                 .font(.system(size: size / 2))
