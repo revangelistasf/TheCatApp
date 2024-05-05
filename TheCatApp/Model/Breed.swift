@@ -13,5 +13,9 @@ struct Breed: Decodable {
     let description: String
     let origin: String
     let temperament: String
-    let referenceImageId: String?
+    var referenceImageId: String?
+
+    var imageUrl: URL? {
+        URL(string: "https://cdn2.thecatapi.com/images/\(referenceImageId ?? "").jpg")
+    }
 }
