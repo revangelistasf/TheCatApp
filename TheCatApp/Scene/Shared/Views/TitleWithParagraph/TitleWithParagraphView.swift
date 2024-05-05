@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct TitleWithParagraphView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    let viewModel: TitleWithParagraphViewModel
 
-#Preview {
-    TitleWithParagraphView()
+    var body: some View {
+        VStack(spacing: 8) {
+            Text(viewModel.title)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.title2)
+                .foregroundStyle(.titleText)
+            Text(viewModel.description)
+                .foregroundStyle(.paragraphText)
+                .font(.headline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
 }

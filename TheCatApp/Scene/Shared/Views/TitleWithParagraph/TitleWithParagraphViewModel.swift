@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct TitleWithParagraphViewModel {
+    var title: String
+    var description: String
+}
