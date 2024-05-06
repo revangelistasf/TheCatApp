@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
-    @StateObject var viewModel: ViewModel
-
-    init(viewModel: ViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject private var viewModel: ViewModel
 
     var body: some View {
         VStack {
