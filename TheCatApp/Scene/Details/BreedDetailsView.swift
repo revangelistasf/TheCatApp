@@ -10,6 +10,10 @@ import SwiftUI
 struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
     @StateObject private var viewModel: ViewModel
 
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
     var body: some View {
         VStack {
             ZStack(alignment: .topTrailing) {
