@@ -29,6 +29,7 @@
 		84B45F962BE7DA3800733192 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B45F952BE7DA3800733192 /* FavoriteButton.swift */; };
 		84BFD6592BE84E3C00A5346A /* TitleWithParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD6582BE84E3C00A5346A /* TitleWithParagraphView.swift */; };
 		84BFD65B2BE84ED900A5346A /* TitleWithParagraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65A2BE84ED900A5346A /* TitleWithParagraphViewModel.swift */; };
+		84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		84B45F952BE7DA3800733192 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		84BFD6582BE84E3C00A5346A /* TitleWithParagraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithParagraphView.swift; sourceTree = "<group>"; };
 		84BFD65A2BE84ED900A5346A /* TitleWithParagraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithParagraphViewModel.swift; sourceTree = "<group>"; };
+		84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +83,7 @@
 		8418F1E12BE5B1D4001E68F9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				8418F1E92BE5B42E001E68F9 /* FavoriteList */,
+				8418F1E92BE5B42E001E68F9 /* FavoritesList */,
 				8418F1E62BE5B402001E68F9 /* BreedList */,
 				8418F1E22BE5B1EC001E68F9 /* MainView.swift */,
 			);
@@ -97,12 +99,13 @@
 			path = BreedList;
 			sourceTree = "<group>";
 		};
-		8418F1E92BE5B42E001E68F9 /* FavoriteList */ = {
+		8418F1E92BE5B42E001E68F9 /* FavoritesList */ = {
 			isa = PBXGroup;
 			children = (
 				8418F1EA2BE5B461001E68F9 /* FavoriteListView.swift */,
+				84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */,
 			);
-			path = FavoriteList;
+			path = FavoritesList;
 			sourceTree = "<group>";
 		};
 		841D5BBA2BE4E4BE00C5EAB1 = {
@@ -334,6 +337,7 @@
 				841D5BDF2BE5184C00C5EAB1 /* BreedEndpoint.swift in Sources */,
 				847019062BE70ECB0009D39F /* ViewState.swift in Sources */,
 				841D5BE72BE5373E00C5EAB1 /* NetworkError.swift in Sources */,
+				84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */,
 				841D5BC72BE4E4BE00C5EAB1 /* TheCatAppApp.swift in Sources */,
 				841D5BE22BE51A5A00C5EAB1 /* BreedRepository.swift in Sources */,
 				8418F1EE2BE6705A001E68F9 /* CardItemView.swift in Sources */,
