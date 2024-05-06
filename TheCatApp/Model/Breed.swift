@@ -15,6 +15,7 @@ struct Breed: Decodable {
     let temperament: String
     let referenceImageId: String?
     let lifeSpan: String
+    var isFavorite: Bool = false
 
     var imageUrl: URL? {
         URL(string: "https://cdn2.thecatapi.com/images/\(referenceImageId ?? "").jpg")

@@ -12,4 +12,5 @@ struct CardItem: Identifiable, Equatable {
     let title: String
     var description: String?
     var imageUrl: URL?
+    var isFavorite: Bool = false
 }

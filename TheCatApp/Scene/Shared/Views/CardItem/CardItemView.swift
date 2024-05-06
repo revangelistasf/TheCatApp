@@ -30,7 +30,7 @@ struct CardItemView: View {
                         .aspectRatio(Constants.imageAspectRatio, contentMode: .fill)
                         .padding()
                 }
-                FavoriteButton(isFavorite: true)
+                FavoriteButton(isFavorite: cardItem.isFavorite)
                     .padding(8)
             }
             Text(cardItem.title)
