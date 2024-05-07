@@ -10,6 +10,7 @@ import Foundation
 protocol BreedRepositoryProtocol {
     func fetchBreeds(page: Int) async throws -> [Breed]
     func toggleFavorite(breed: Breed)
+    func fetchAllFavorites() -> [Breed]
 }
 
 final class BreedRepository: BreedRepositoryProtocol {
@@ -45,11 +46,22 @@ final class BreedRepository: BreedRepositoryProtocol {
         }
     }
 
+    func fetchAllFavorites() -> [Breed] {
+        do {
+            let repoResult = try persistenceService.fetchFavorites()
+            return repoResult.map { Breed(persistenceModel: $0) }
+        } catch {
+            print(error)
+            return []
+        }
+    }
+
     func toggleFavorite(breed: Breed) {
         do {
             if breed.isFavorite {
                 try persistenceService.removeFavorite(index: breed.id)
             } else {
+                breed.isFavorite = true
                 try persistenceService.addFavorite(breed: breed)
             }
         } catch {

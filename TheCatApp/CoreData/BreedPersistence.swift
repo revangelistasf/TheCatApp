@@ -31,6 +31,7 @@ final class BreedPersistence: BreedPersistenceProtocol {
 
     func fetchFavorites() throws -> [BreedPersistenceModel] {
         let request = NSFetchRequest<BreedPersistenceModel>(entityName: "BreedPersistenceModel")
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         return try context.fetch(request)
     }
 

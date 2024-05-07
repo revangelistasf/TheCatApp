@@ -20,15 +20,19 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
     init(repository: BreedRepositoryProtocol) {
         self.repository = repository
         self.state = .idle
-
-        Task {
-            self.state = .loading
-            await fetchFavoriteBreeds()
-        }
+        fetchFavoriteBreeds()
+        configureObserver()
     }
 
-    @MainActor
-    private func fetchFavoriteBreeds() async {
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.fetchFavoriteBreeds), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
+    }
 
+    @objc private func fetchFavoriteBreeds() {
+        self.state = .loading
+        let cards = repository.fetchAllFavorites().map {
+            CardItem(id: $0.id, title: $0.name, description: $0.lifeSpan, imageUrl: $0.imageUrl, isFavorite: $0.isFavorite)
+        }
+        state = .success(cards)
     }
 }

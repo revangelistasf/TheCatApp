@@ -36,9 +36,21 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     init(repository: BreedRepositoryProtocol) {
         self.repository = repository
         self.state = .idle
-
+        configureObserver()
         Task {
             state = .loading
+            await fetchBreeds()
+        }
+    }
+
+    private func configureObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
+    }
+
+    @objc func reloadData() {
+        state = .loading
+        Task {
+            currentPage = 0
             await fetchBreeds()
         }
     }

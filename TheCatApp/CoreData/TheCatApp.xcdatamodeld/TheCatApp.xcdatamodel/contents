@@ -3,7 +3,7 @@
     <entity name="BreedPersistenceModel" representedClassName="BreedPersistenceModel" syncable="YES">
         <attribute name="breedDescription" attributeType="String"/>
         <attribute name="id" attributeType="String"/>
-        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="lifeSpan" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="origin" attributeType="String"/>

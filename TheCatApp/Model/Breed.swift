@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Breed: Decodable {
+class Breed: Decodable {
     let id: String
     let name: String
     let description: String
@@ -29,6 +29,28 @@ struct Breed: Decodable {
         case temperament
         case referenceImageId
         case lifeSpan
+    }
+
+    init(id: String, name: String, description: String, origin: String, temperament: String, referenceImageId: String?, lifeSpan: String, isFavorite: Bool) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.origin = origin
+        self.temperament = temperament
+        self.referenceImageId = referenceImageId
+        self.lifeSpan = lifeSpan
+        self.isFavorite = isFavorite
+    }
+
+    init(persistenceModel: BreedPersistenceModel) {
+        self.id = persistenceModel.id
+        self.name = persistenceModel.name
+        self.description = persistenceModel.breedDescription
+        self.origin = persistenceModel.origin
+        self.temperament = persistenceModel.temperament
+        self.referenceImageId = persistenceModel.referenceImageId
+        self.lifeSpan = persistenceModel.lifeSpan
+        self.isFavorite = persistenceModel.isFavorite
     }
 }
 

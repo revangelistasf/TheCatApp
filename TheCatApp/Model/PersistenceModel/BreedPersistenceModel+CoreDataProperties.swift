@@ -16,14 +16,14 @@ extension BreedPersistenceModel {
         return NSFetchRequest<BreedPersistenceModel>(entityName: "BreedPersistenceModel")
     }
 
-    @NSManaged public var breedDescription: String?
-    @NSManaged public var id: String?
+    @NSManaged public var breedDescription: String
+    @NSManaged public var id: String
     @NSManaged public var isFavorite: Bool
-    @NSManaged public var lifeSpan: String?
-    @NSManaged public var name: String?
-    @NSManaged public var origin: String?
+    @NSManaged public var lifeSpan: String
+    @NSManaged public var name: String
+    @NSManaged public var origin: String
     @NSManaged public var referenceImageId: String?
-    @NSManaged public var temperament: String?
+    @NSManaged public var temperament: String
 
     convenience init(breed: Breed, context: NSManagedObjectContext) {
         self.init(context: context)

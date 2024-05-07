@@ -28,7 +28,7 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: Constants.padding) {
-                    ForEach(itemsToDisplay, id: \.id) { item in
+                    ForEach(itemsToDisplay, id: \.uuid) { item in
                         CardItemView(cardItem: item)
                     }
                 }
