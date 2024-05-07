@@ -14,6 +14,7 @@ enum FavoriteTypeStyle {
 
 struct FavoriteButton: View {
     @State var isFavorite: Bool
+    var action: (() -> Void)?
     var favoriteStyle: FavoriteTypeStyle = .innerCard
 
     var size: CGFloat {
@@ -28,15 +29,18 @@ struct FavoriteButton: View {
     var body: some View {
         Button {
             isFavorite.toggle()
+            action?()
         } label: {
             Label("add to favorites", systemImage: Constants.imageName)
                 .labelStyle(.iconOnly)
                 .foregroundStyle(isFavorite ? .red : .black)
                 .font(.system(size: size / 2))
+
         }
         .frame(width: size, height: size)
         .background(.white)
         .clipShape(Circle())
+        
     }
 }
 
