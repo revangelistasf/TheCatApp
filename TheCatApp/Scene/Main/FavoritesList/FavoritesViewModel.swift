@@ -6,33 +6,39 @@
 //
 
 import Foundation
-import SwiftData
 
 protocol FavoritesViewModelProtocol: ObservableObject {
     var state: ViewState<[CardItem], Error> { get }
+    func start()
+    func toggleFavorite(item: CardItem)
 }
 
-@Observable
 final class FavoritesViewModel: FavoritesViewModelProtocol {
-    private(set)var state: ViewState<[CardItem], Error>
+    @Published private(set)var state: ViewState<[CardItem], Error>
     private var repository: BreedRepositoryProtocol
+    private var breeds: [Breed] = []
 
     init(repository: BreedRepositoryProtocol) {
         self.repository = repository
         self.state = .idle
+    }
+
+    func start() {
         fetchFavoriteBreeds()
-        configureObserver()
     }
 
-    private func configureObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.fetchFavoriteBreeds), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
-    }
-
-    @objc private func fetchFavoriteBreeds() {
+    private func fetchFavoriteBreeds() {
         self.state = .loading
-        let cards = repository.fetchAllFavorites().map {
+        self.breeds = repository.fetchAllFavorites()
+        let cards = self.breeds.map {
             CardItem(id: $0.id, title: $0.name, description: $0.lifeSpan, imageUrl: $0.imageUrl, isFavorite: $0.isFavorite)
         }
         state = .success(cards)
+    }
+
+    func toggleFavorite(item: CardItem) {
+        guard let selectedBreed = breeds.first(where: { $0.id == item.id }) else { return }
+        repository.toggleFavorite(breed: selectedBreed)
+        fetchFavoriteBreeds()
     }
 }
