@@ -14,7 +14,7 @@ protocol BreedRepositoryProtocol {
 }
 
 final class BreedRepository: BreedRepositoryProtocol {
-    private let networkService: NetworkService
+    private let networkService: NetworkServiceProtocol
     private let persistenceService: BreedPersistenceProtocol
 
     private let decoder: JSONDecoder = {
@@ -23,7 +23,10 @@ final class BreedRepository: BreedRepositoryProtocol {
         return decoder
     }()
 
-    init(networkService: NetworkService, persistenceService: BreedPersistenceProtocol = BreedPersistence()) {
+    init(
+        networkService: NetworkServiceProtocol = NetworkService(),
+        persistenceService: BreedPersistenceProtocol = BreedPersistence()
+    ) {
         self.networkService = networkService
         self.persistenceService = persistenceService
     }

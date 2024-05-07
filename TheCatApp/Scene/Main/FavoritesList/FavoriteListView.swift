@@ -54,5 +54,5 @@ private enum Constants {
 }
 
 #Preview {
-    FavoritesView(viewModel: FavoritesViewModel(repository: BreedRepository(networkService: NetworkService())))
+    FavoritesView(viewModel: FavoritesViewModel(repository: BreedRepository()))
 }
