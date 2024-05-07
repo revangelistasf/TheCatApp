@@ -8,44 +8,43 @@
 import CoreData
 
 protocol BreedPersistenceProtocol {
-    func fetchFavorites() throws -> [String]
-    func addFavorite(idx: String)
-    func removeFavorite(idx: String)
+    func fetchFavorites() throws -> [BreedPersistenceModel]
+    func addFavorite(breed: Breed) throws
+    func removeFavorite(index: String) throws
 }
 
 final class BreedPersistence: BreedPersistenceProtocol {
-    private let container: NSPersistentContainer
-    private lazy var favorites: Favorites? = Favorites(context: container.viewContext)
-
-    init() {
-        container = NSPersistentContainer(name: "TheCatApp")
+    private static var container: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "TheCatApp")
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
+        return container
+    }()
+
+    private var context: NSManagedObjectContext {
+        return Self.container.viewContext
+    }
+    private var favorites: [BreedPersistenceModel] = []
+
+    func fetchFavorites() throws -> [BreedPersistenceModel] {
+        let request = NSFetchRequest<BreedPersistenceModel>(entityName: "BreedPersistenceModel")
+        return try context.fetch(request)
     }
 
-    func fetchFavorites() throws -> [String] {
-        let request = NSFetchRequest<Favorites>(entityName: "Favorites")
-        self.favorites = try container.viewContext.fetch(request).first
-        return favorites?.idx.map { String($0) } ?? []
+    func addFavorite(breed: Breed) throws {
+        self.favorites = try fetchFavorites()
+        self.favorites.append(BreedPersistenceModel(breed: breed, context: context))
+        try? context.save()
     }
 
-    func addFavorite(idx: String) {
-        if let favorites {
-            favorites.idx.append(NSString(string: idx))
-        } else {
-            self.favorites = Favorites(context: container.viewContext)
-            self.favorites?.idx.append(NSString(string: idx))
-        }
-        try? container.viewContext.save()
-    }
-
-    func removeFavorite(idx: String) {
-        if let index = favorites?.idx.firstIndex(of: NSString(string: idx)) {
-            favorites?.idx.remove(at: index)
-            try? container.viewContext.save()
+    func removeFavorite(index: String) throws {
+        self.favorites = try fetchFavorites()
+        if let favoriteIndex = self.favorites.compactMap({$0.id}).firstIndex(of: index) {
+            context.delete(self.favorites[favoriteIndex])
+            try? context.save()
         }
     }
 }

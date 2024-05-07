@@ -18,6 +18,7 @@ protocol BreedListViewModelProtocol: ObservableObject {
 final class BreedListViewModel: BreedListViewModelProtocol {
     @Published private(set)var state: ViewState<[CardItem], Error>
     @Published var searchTerm: String = ""
+    private var breeds: [Breed] = []
 
     private var currentPage: Int = 0
     private var didReachLastPage = false
@@ -46,6 +47,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     func fetchBreeds(page: Int = 0) async {
         do {
             let result = try await repository.fetchBreeds(page: page)
+            self.breeds.append(contentsOf: result)
             var cardItems = state.value ?? []
             cardItems += result.map {
                 CardItem(
@@ -84,6 +86,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     }
 
     func addToFavorite(item: CardItem) {
-        repository.toggleFavorite(breedId: item.id, isFavorite: item.isFavorite)
+        guard let selectedBreed = breeds.first(where: { $0.id == item.id }) else { return }
+        repository.toggleFavorite(breed: selectedBreed)
     }
 }

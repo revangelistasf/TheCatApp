@@ -27,6 +27,8 @@
 		847019012BE6DA570009D39F /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847019002BE6DA570009D39F /* CardItem.swift */; };
 		847019062BE70ECB0009D39F /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847019052BE70ECB0009D39F /* ViewState.swift */; };
 		84B45F962BE7DA3800733192 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B45F952BE7DA3800733192 /* FavoriteButton.swift */; };
+		84B8897F2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8897D2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataClass.swift */; };
+		84B889802BEA59FB00341C4A /* BreedPersistenceModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8897E2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataProperties.swift */; };
 		84BFD6592BE84E3C00A5346A /* TitleWithParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD6582BE84E3C00A5346A /* TitleWithParagraphView.swift */; };
 		84BFD65B2BE84ED900A5346A /* TitleWithParagraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65A2BE84ED900A5346A /* TitleWithParagraphViewModel.swift */; };
 		84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */; };
@@ -58,6 +60,8 @@
 		847019002BE6DA570009D39F /* CardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
 		847019052BE70ECB0009D39F /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		84B45F952BE7DA3800733192 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		84B8897D2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreedPersistenceModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		84B8897E2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BreedPersistenceModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		84BFD6582BE84E3C00A5346A /* TitleWithParagraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithParagraphView.swift; sourceTree = "<group>"; };
 		84BFD65A2BE84ED900A5346A /* TitleWithParagraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithParagraphViewModel.swift; sourceTree = "<group>"; };
 		84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 		841D5BE32BE51C3A00C5EAB1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84F5B7E42BEA590000CCF252 /* PersistenceModel */,
 				841D5BE42BE51C6600C5EAB1 /* Breed.swift */,
 			);
 			path = Model;
@@ -270,6 +275,15 @@
 				84E486302BE993DE00A8F156 /* BreedPersistence.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		84F5B7E42BEA590000CCF252 /* PersistenceModel */ = {
+			isa = PBXGroup;
+			children = (
+				84B8897D2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataClass.swift */,
+				84B8897E2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataProperties.swift */,
+			);
+			path = PersistenceModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,6 +374,8 @@
 				84E486312BE993DE00A8F156 /* BreedPersistence.swift in Sources */,
 				847019062BE70ECB0009D39F /* ViewState.swift in Sources */,
 				841D5BE72BE5373E00C5EAB1 /* NetworkError.swift in Sources */,
+				84B8897F2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataClass.swift in Sources */,
+				84B889802BEA59FB00341C4A /* BreedPersistenceModel+CoreDataProperties.swift in Sources */,
 				84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */,
 				841D5BC72BE4E4BE00C5EAB1 /* TheCatAppApp.swift in Sources */,
 				841D5BE22BE51A5A00C5EAB1 /* BreedRepository.swift in Sources */,

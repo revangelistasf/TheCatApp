@@ -9,7 +9,7 @@ import Foundation
 
 protocol BreedRepositoryProtocol {
     func fetchBreeds(page: Int) async throws -> [Breed]
-    func toggleFavorite(breedId: String, isFavorite: Bool)
+    func toggleFavorite(breed: Breed)
 }
 
 final class BreedRepository: BreedRepositoryProtocol {
@@ -31,13 +31,12 @@ final class BreedRepository: BreedRepositoryProtocol {
         do {
             let responseData = try await networkService.request(BreedEndpoint.breeds(page: page))
             var breeds = try decoder.decode([Breed].self, from: responseData)
-            let favoriteIds = try persistenceService.fetchFavorites()
-            favoriteIds.forEach { idx in
-                if let index = breeds.firstIndex(where: { $0.id == idx }) {
+            let favorites = try persistenceService.fetchFavorites()
+            favorites.forEach { favorite in
+                if let index = breeds.firstIndex(where: { $0.id == favorite.id }) {
                     breeds[index].isFavorite = true
                 }
             }
-            
             return breeds
         } catch {
             #warning("remove this print after dealing with those errors properly")
@@ -46,7 +45,16 @@ final class BreedRepository: BreedRepositoryProtocol {
         }
     }
 
-    func toggleFavorite(breedId: String, isFavorite: Bool) {
-        isFavorite ? persistenceService.removeFavorite(idx: breedId) : persistenceService.addFavorite(idx: breedId)
+    func toggleFavorite(breed: Breed) {
+        do {
+            if breed.isFavorite {
+                try persistenceService.removeFavorite(index: breed.id)
+            } else {
+                try persistenceService.addFavorite(breed: breed)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+
     }
 }
