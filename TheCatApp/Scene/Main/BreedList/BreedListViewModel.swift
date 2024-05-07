@@ -12,6 +12,7 @@ protocol BreedListViewModelProtocol: ObservableObject {
     var searchTerm: String { get set }
     var isSearching: Bool { get }
     func didDisplay(item: CardItem)
+    func addToFavorite(item: CardItem)
 }
 
 final class BreedListViewModel: BreedListViewModelProtocol {
@@ -46,7 +47,14 @@ final class BreedListViewModel: BreedListViewModelProtocol {
         do {
             let result = try await repository.fetchBreeds(page: page)
             var cardItems = state.value ?? []
-            cardItems += result.map { CardItem(title: $0.name, imageUrl: $0.imageUrl) }
+            cardItems += result.map {
+                CardItem(
+                    id: $0.id,
+                    title: $0.name,
+                    imageUrl: $0.imageUrl,
+                    isFavorite: $0.isFavorite
+                )
+            }
             if state.isLoadingNextPage, result.isEmpty {
                 // API didn't inform the page number, or total items, so I did it to prevent new requests
                 didReachLastPage = true
@@ -73,5 +81,9 @@ final class BreedListViewModel: BreedListViewModelProtocol {
             await fetchBreeds(page: currentPage)
         }
 
+    }
+
+    func addToFavorite(item: CardItem) {
+        repository.toggleFavorite(breedId: item.id, isFavorite: item.isFavorite)
     }
 }

@@ -36,11 +36,13 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: Constants.padding) {
-                    ForEach(itemsToDisplay, id: \.id) { item in
-                        CardItemView(cardItem: item)
-                            .onAppear {
-                                viewModel.didDisplay(item: item)
-                            }
+                    ForEach(itemsToDisplay, id: \.uuid) { item in
+                        CardItemView(cardItem: item) {
+                            viewModel.addToFavorite(item: item)
+                        }
+                        .onAppear {
+                            viewModel.didDisplay(item: item)
+                        }
                     }
                 }
                 .padding()
