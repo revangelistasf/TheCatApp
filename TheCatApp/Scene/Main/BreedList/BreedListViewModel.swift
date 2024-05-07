@@ -11,6 +11,7 @@ protocol BreedListViewModelProtocol: ObservableObject {
     var state: ViewState<[CardItem], Error> { get }
     var searchTerm: String { get set }
     var isSearching: Bool { get }
+    func start()
     func didDisplay(item: CardItem)
     func toggleFavorite(item: CardItem)
 }
@@ -36,11 +37,16 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     init(repository: BreedRepositoryProtocol) {
         self.repository = repository
         self.state = .idle
+    }
+
+    func start() {
+        currentPage = 0
+        state = .loading
         Task {
-            state = .loading
             await fetchBreeds()
         }
     }
+
 
     @MainActor
     func fetchBreeds(page: Int = 0) async {

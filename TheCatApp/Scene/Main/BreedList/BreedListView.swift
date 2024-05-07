@@ -46,7 +46,9 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
                     }
                 }
                 .padding()
-
+                .onAppear {
+                    viewModel.start()
+                }
                 if viewModel.state.isLoadingNextPage, !viewModel.isSearching {
                     ProgressView()
                 }

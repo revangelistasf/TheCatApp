@@ -17,7 +17,7 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
 
     private var itemsToDisplay: [CardItem] {
         switch viewModel.state {
-        case .success(let value), .loadingNextPage(let value):
+        case .success(let value):
             return value
         default:
             return []
