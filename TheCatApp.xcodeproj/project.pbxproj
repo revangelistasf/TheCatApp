@@ -30,6 +30,10 @@
 		84BFD6592BE84E3C00A5346A /* TitleWithParagraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD6582BE84E3C00A5346A /* TitleWithParagraphView.swift */; };
 		84BFD65B2BE84ED900A5346A /* TitleWithParagraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65A2BE84ED900A5346A /* TitleWithParagraphViewModel.swift */; };
 		84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */; };
+		84E4862B2BE9922600A8F156 /* TheCatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E486292BE9922600A8F156 /* TheCatApp.xcdatamodeld */; };
+		84E486312BE993DE00A8F156 /* BreedPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E486302BE993DE00A8F156 /* BreedPersistence.swift */; };
+		84E486342BE9A9CF00A8F156 /* Favorites+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E486322BE9A9CF00A8F156 /* Favorites+CoreDataClass.swift */; };
+		84E486352BE9A9CF00A8F156 /* Favorites+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E486332BE9A9CF00A8F156 /* Favorites+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +61,10 @@
 		84BFD6582BE84E3C00A5346A /* TitleWithParagraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithParagraphView.swift; sourceTree = "<group>"; };
 		84BFD65A2BE84ED900A5346A /* TitleWithParagraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithParagraphViewModel.swift; sourceTree = "<group>"; };
 		84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		84E4862A2BE9922600A8F156 /* TheCatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheCatApp.xcdatamodel; sourceTree = "<group>"; };
+		84E486302BE993DE00A8F156 /* BreedPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedPersistence.swift; sourceTree = "<group>"; };
+		84E486322BE9A9CF00A8F156 /* Favorites+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorites+CoreDataClass.swift"; sourceTree = "<group>"; };
+		84E486332BE9A9CF00A8F156 /* Favorites+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorites+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				841D5BD42BE4EA3B00C5EAB1 /* Application */,
+				84E486282BE9920500A8F156 /* CoreData */,
 				841D5BE32BE51C3A00C5EAB1 /* Model */,
 				841D5BD52BE4EB7900C5EAB1 /* Network */,
 				841D5BE02BE51A3800C5EAB1 /* Repository */,
@@ -252,6 +261,17 @@
 			path = TitleWithParagraph;
 			sourceTree = "<group>";
 		};
+		84E486282BE9920500A8F156 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				84E486322BE9A9CF00A8F156 /* Favorites+CoreDataClass.swift */,
+				84E486332BE9A9CF00A8F156 /* Favorites+CoreDataProperties.swift */,
+				84E486292BE9922600A8F156 /* TheCatApp.xcdatamodeld */,
+				84E486302BE993DE00A8F156 /* BreedPersistence.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -334,7 +354,10 @@
 				841D5BDB2BE510FE00C5EAB1 /* RequestMethod.swift in Sources */,
 				8436B1582BE8086400A3C398 /* BreedDetailsViewModel.swift in Sources */,
 				8418F1F02BE6A99C001E68F9 /* BreedListViewModel.swift in Sources */,
+				84E486342BE9A9CF00A8F156 /* Favorites+CoreDataClass.swift in Sources */,
+				84E486352BE9A9CF00A8F156 /* Favorites+CoreDataProperties.swift in Sources */,
 				841D5BDF2BE5184C00C5EAB1 /* BreedEndpoint.swift in Sources */,
+				84E486312BE993DE00A8F156 /* BreedPersistence.swift in Sources */,
 				847019062BE70ECB0009D39F /* ViewState.swift in Sources */,
 				841D5BE72BE5373E00C5EAB1 /* NetworkError.swift in Sources */,
 				84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */,
@@ -342,6 +365,7 @@
 				841D5BE22BE51A5A00C5EAB1 /* BreedRepository.swift in Sources */,
 				8418F1EE2BE6705A001E68F9 /* CardItemView.swift in Sources */,
 				847019012BE6DA570009D39F /* CardItem.swift in Sources */,
+				84E4862B2BE9922600A8F156 /* TheCatApp.xcdatamodeld in Sources */,
 				8418F1EB2BE5B461001E68F9 /* FavoriteListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -546,6 +570,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84E486292BE9922600A8F156 /* TheCatApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84E4862A2BE9922600A8F156 /* TheCatApp.xcdatamodel */,
+			);
+			currentVersion = 84E4862A2BE9922600A8F156 /* TheCatApp.xcdatamodel */;
+			name = TheCatApp.xcdatamodeld;
+			path = /Users/admin/Developer/TheCatApp/TheCatApp/CoreData/TheCatApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 841D5BBB2BE4E4BE00C5EAB1 /* Project object */;
 }
