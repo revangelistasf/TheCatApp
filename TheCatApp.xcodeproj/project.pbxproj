@@ -161,8 +161,8 @@
 		841D5BD42BE4EA3B00C5EAB1 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				841D5BC62BE4E4BE00C5EAB1 /* TheCatAppApp.swift */,
 				841D5BCA2BE4E4BF00C5EAB1 /* Assets.xcassets */,
+				841D5BC62BE4E4BE00C5EAB1 /* TheCatAppApp.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -269,10 +269,10 @@
 		84E486282BE9920500A8F156 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				84E486302BE993DE00A8F156 /* BreedPersistence.swift */,
 				84E486322BE9A9CF00A8F156 /* Favorites+CoreDataClass.swift */,
 				84E486332BE9A9CF00A8F156 /* Favorites+CoreDataProperties.swift */,
 				84E486292BE9922600A8F156 /* TheCatApp.xcdatamodeld */,
-				84E486302BE993DE00A8F156 /* BreedPersistence.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";

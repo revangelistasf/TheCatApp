@@ -13,16 +13,13 @@ protocol NetworkServiceProtocol {
 
 final class NetworkService: NetworkServiceProtocol {
     func request(_ endpoint: Endpoint) async throws -> Data {
-        guard let urlRequest = makeRequest(endpoint) else {
-            throw URLError(.badURL)
-        }
-        
+        let urlRequest = try makeRequest(endpoint)
         let (data, urlResponse) = try await URLSession.shared.data(for: urlRequest)
         try handle(urlResponse: urlResponse)
         return data
     }
 
-    private func makeRequest(_ endpoint: Endpoint) -> URLRequest? {
+    private func makeRequest(_ endpoint: Endpoint) throws -> URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
@@ -30,7 +27,7 @@ final class NetworkService: NetworkServiceProtocol {
         urlComponents.queryItems = endpoint.queryItems
 
         guard let url = urlComponents.url else {
-            return nil
+            throw URLError(.badURL)
         }
         
         var request = URLRequest(url: url)
