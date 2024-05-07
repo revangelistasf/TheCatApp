@@ -12,7 +12,7 @@ protocol BreedListViewModelProtocol: ObservableObject {
     var searchTerm: String { get set }
     var isSearching: Bool { get }
     func didDisplay(item: CardItem)
-    func addToFavorite(item: CardItem)
+    func toggleFavorite(item: CardItem)
 }
 
 final class BreedListViewModel: BreedListViewModelProtocol {
@@ -36,21 +36,8 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     init(repository: BreedRepositoryProtocol) {
         self.repository = repository
         self.state = .idle
-        configureObserver()
         Task {
             state = .loading
-            await fetchBreeds()
-        }
-    }
-
-    private func configureObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: Notification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
-    }
-
-    @objc func reloadData() {
-        state = .loading
-        Task {
-            currentPage = 0
             await fetchBreeds()
         }
     }
@@ -97,7 +84,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
 
     }
 
-    func addToFavorite(item: CardItem) {
+    func toggleFavorite(item: CardItem) {
         guard let selectedBreed = breeds.first(where: { $0.id == item.id }) else { return }
         repository.toggleFavorite(breed: selectedBreed)
     }

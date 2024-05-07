@@ -38,7 +38,7 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
                 LazyVGrid(columns: gridItemLayout, spacing: Constants.padding) {
                     ForEach(itemsToDisplay, id: \.uuid) { item in
                         CardItemView(cardItem: item) {
-                            viewModel.addToFavorite(item: item)
+                            viewModel.toggleFavorite(item: item)
                         }
                         .onAppear {
                             viewModel.didDisplay(item: item)
