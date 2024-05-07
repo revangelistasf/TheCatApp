@@ -34,11 +34,28 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
                         }
                     }
                 }
-                .onAppear {
-                    viewModel.start()
-                }
                 .padding()
             }
+            .stateView(shouldShowState: itemsToDisplay.isEmpty) {
+                emptyStateView
+            }
+        }
+        .onAppear {
+            viewModel.start()
+        }
+    }
+
+    var emptyStateView: some View {
+        VStack(alignment: .center) {
+            Spacer()
+            Image(.sadCat)
+                .resizable()
+                .frame(width: Constants.emptyStateImageSize, height: Constants.emptyStateImageSize)
+            Text("No favorites added yet.")
+                .font(.title)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.titleText)
+            Spacer()
         }
     }
 
@@ -51,6 +68,7 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
 private enum Constants {
     static let padding: CGFloat = 16
     static let numberOfColumns: Int = 2
+    static let emptyStateImageSize: CGFloat = 100
 }
 
 #Preview {
