@@ -20,6 +20,16 @@ struct Breed: Decodable {
     var imageUrl: URL? {
         URL(string: "https://cdn2.thecatapi.com/images/\(referenceImageId ?? "").jpg")
     }
+
+    enum CodingKeys: CodingKey {
+        case id
+        case name
+        case description
+        case origin
+        case temperament
+        case referenceImageId
+        case lifeSpan
+    }
 }
 
 extension Breed {
@@ -30,7 +40,8 @@ extension Breed {
         origin: String = "Egypt",
         temperament: String = "Active, Energetic, Independent, Intelligent, Gentle",
         referenceImageId: String? = "0XYvRd7oD",
-        lifeSpan: String = "14 - 15"
+        lifeSpan: String = "14 - 15",
+        isFavorite: Bool = false
     ) -> Breed {
         return Breed(
             id: id,
@@ -39,7 +50,8 @@ extension Breed {
             origin: origin,
             temperament: temperament,
             referenceImageId: referenceImageId,
-            lifeSpan: lifeSpan
+            lifeSpan: lifeSpan,
+            isFavorite: isFavorite
         )
     }
 }
