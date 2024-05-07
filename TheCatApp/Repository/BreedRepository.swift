@@ -31,7 +31,7 @@ final class BreedRepository: BreedRepositoryProtocol {
     func fetchBreeds(page: Int) async throws -> [Breed] {
         do {
             let responseData = try await networkService.request(BreedEndpoint.breeds(page: page))
-            var breeds = try decoder.decode([Breed].self, from: responseData)
+            let breeds = try decoder.decode([Breed].self, from: responseData)
             let favorites = try persistenceService.fetchFavorites()
             favorites.forEach { favorite in
                 if let index = breeds.firstIndex(where: { $0.id == favorite.id }) {
