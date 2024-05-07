@@ -17,6 +17,7 @@ private enum Constants {
 
 struct CardItemView: View {
     let cardItem: CardItem
+    var action: (() -> Void)?
 
     var body: some View {
         VStack {
@@ -30,8 +31,10 @@ struct CardItemView: View {
                         .aspectRatio(Constants.imageAspectRatio, contentMode: .fill)
                         .padding()
                 }
-                FavoriteButton(isFavorite: true)
-                    .padding(8)
+                FavoriteButton(isFavorite: cardItem.isFavorite) {
+                    action?()
+                }
+                .padding(8)
             }
             Text(cardItem.title)
                 .lineLimit(Constants.titleLineLimit)

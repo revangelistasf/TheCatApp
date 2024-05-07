@@ -19,7 +19,9 @@ struct MainView: View {
                     Label("Breed List", systemImage: "cat")
                 }
 
-            FavoriteListView()
+            FavoritesView(
+                viewModel: FavoritesViewModel(repository: BreedRepository(networkService: NetworkService()))
+            )
                 .tabItem {
                     Label("Favorites", systemImage: "star")
                 }

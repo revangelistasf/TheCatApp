@@ -1,5 +1,5 @@
 //
-//  BreedListView.swift
+//  FavoriteListView.swift
 //  TheCatApp
 //
 //  Created by revangelista on 04/05/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
+struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
     @StateObject private var viewModel: ViewModel
 
     private let gridItemLayout = Array(
@@ -17,19 +17,11 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
 
     private var itemsToDisplay: [CardItem] {
         switch viewModel.state {
-        case .success(let value), .loadingNextPage(let value):
-            if viewModel.isSearching {
-                return value.filter { $0.title.lowercased().contains(viewModel.searchTerm.lowercased()) }
-            } else {
-                return value
-            }
+        case .success(let value):
+            return value
         default:
             return []
         }
-    }
-
-    init(viewModel: ViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
@@ -40,21 +32,18 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
                         CardItemView(cardItem: item) {
                             viewModel.toggleFavorite(item: item)
                         }
-                        .onAppear {
-                            viewModel.didDisplay(item: item)
-                        }
                     }
                 }
-                .padding()
                 .onAppear {
                     viewModel.start()
                 }
-                if viewModel.state.isLoadingNextPage, !viewModel.isSearching {
-                    ProgressView()
-                }
+                .padding()
             }
         }
-        .searchable(text: $viewModel.searchTerm)
+    }
+
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 }
 
@@ -62,4 +51,8 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
 private enum Constants {
     static let padding: CGFloat = 16
     static let numberOfColumns: Int = 2
+}
+
+#Preview {
+    FavoritesView(viewModel: FavoritesViewModel(repository: BreedRepository(networkService: NetworkService())))
 }
