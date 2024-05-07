@@ -12,7 +12,6 @@ protocol Endpoint {
     var host: String { get }
     var path: String { get }
     var header: [String: String]? { get }
-    var method: RequestMethod { get }
     var queryItems: [URLQueryItem]? { get }
 }
 
@@ -29,10 +28,6 @@ extension Endpoint {
         return [
             "Content-Tye": "application/json"
         ]
-    }
-
-    var method: RequestMethod {
-        return .get
     }
 
     var queryItems: [URLQueryItem]? {

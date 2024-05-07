@@ -17,7 +17,6 @@
 		841D5BCE2BE4E4BF00C5EAB1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 841D5BCD2BE4E4BF00C5EAB1 /* Preview Assets.xcassets */; };
 		841D5BD72BE4F78700C5EAB1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BD62BE4F78700C5EAB1 /* NetworkService.swift */; };
 		841D5BD92BE5025C00C5EAB1 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BD82BE5025C00C5EAB1 /* Endpoint.swift */; };
-		841D5BDB2BE510FE00C5EAB1 /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BDA2BE510FE00C5EAB1 /* RequestMethod.swift */; };
 		841D5BDF2BE5184C00C5EAB1 /* BreedEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BDE2BE5184C00C5EAB1 /* BreedEndpoint.swift */; };
 		841D5BE22BE51A5A00C5EAB1 /* BreedRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BE12BE51A5A00C5EAB1 /* BreedRepository.swift */; };
 		841D5BE52BE51C6600C5EAB1 /* Breed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D5BE42BE51C6600C5EAB1 /* Breed.swift */; };
@@ -50,7 +49,6 @@
 		841D5BCD2BE4E4BF00C5EAB1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		841D5BD62BE4F78700C5EAB1 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		841D5BD82BE5025C00C5EAB1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		841D5BDA2BE510FE00C5EAB1 /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
 		841D5BDE2BE5184C00C5EAB1 /* BreedEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedEndpoint.swift; sourceTree = "<group>"; };
 		841D5BE12BE51A5A00C5EAB1 /* BreedRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedRepository.swift; sourceTree = "<group>"; };
 		841D5BE42BE51C6600C5EAB1 /* Breed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breed.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 				841D5BDC2BE5182900C5EAB1 /* Endpoints */,
 				841D5BE62BE5373E00C5EAB1 /* NetworkError.swift */,
 				841D5BD62BE4F78700C5EAB1 /* NetworkService.swift */,
-				841D5BDA2BE510FE00C5EAB1 /* RequestMethod.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -365,7 +362,6 @@
 				841D5BD72BE4F78700C5EAB1 /* NetworkService.swift in Sources */,
 				84BFD6592BE84E3C00A5346A /* TitleWithParagraphView.swift in Sources */,
 				841D5BD92BE5025C00C5EAB1 /* Endpoint.swift in Sources */,
-				841D5BDB2BE510FE00C5EAB1 /* RequestMethod.swift in Sources */,
 				8436B1582BE8086400A3C398 /* BreedDetailsViewModel.swift in Sources */,
 				8418F1F02BE6A99C001E68F9 /* BreedListViewModel.swift in Sources */,
 				84E486342BE9A9CF00A8F156 /* Favorites+CoreDataClass.swift in Sources */,

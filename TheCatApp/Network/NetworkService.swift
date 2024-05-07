@@ -31,7 +31,6 @@ final class NetworkService: NetworkServiceProtocol {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = endpoint.method.rawValue
         request.allHTTPHeaderFields = endpoint.header
         return request
     }
