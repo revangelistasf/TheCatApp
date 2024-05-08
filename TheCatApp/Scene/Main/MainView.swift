@@ -12,15 +12,14 @@ struct MainView: View {
         TabView {
             BreedListView(
                 viewModel: BreedListViewModel(
-                    repository: BreedRepository(networkService: NetworkService())
+                    repository: BreedRepository()
                 )
             )
                 .tabItem {
                     Label("Breed List", systemImage: "cat")
                 }
-
             FavoritesView(
-                viewModel: FavoritesViewModel(repository: BreedRepository(networkService: NetworkService()))
+                viewModel: FavoritesViewModel(repository: BreedRepository())
             )
                 .tabItem {
                     Label("Favorites", systemImage: "star")

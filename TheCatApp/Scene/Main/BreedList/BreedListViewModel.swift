@@ -8,16 +8,17 @@
 import Foundation
 
 protocol BreedListViewModelProtocol: ObservableObject {
-    var state: ViewState<[CardItem], Error> { get }
+    var state: ViewState<[CardItem], ErrorViewType> { get }
     var searchTerm: String { get set }
     var isSearching: Bool { get }
     func start()
     func didDisplay(item: CardItem)
     func toggleFavorite(item: CardItem)
+    func getBreedModel(item: CardItem) -> Breed?
 }
 
 final class BreedListViewModel: BreedListViewModelProtocol {
-    @Published private(set)var state: ViewState<[CardItem], Error>
+    @Published private(set)var state: ViewState<[CardItem], ErrorViewType>
     @Published var searchTerm: String = ""
     private var breeds: [Breed] = []
 
@@ -68,13 +69,23 @@ final class BreedListViewModel: BreedListViewModelProtocol {
             }
             state = .success(cardItems)
             currentPage += 1
+        } catch (let error as NetworkError) {
+            switch error {
+            case .invalidResponse, .generic:
+                state = .error(.generic)
+            case .serverError:
+                state = .error(.serverError)
+            case .clientError:
+                state = .error(.clientError)
+            }
         } catch {
-            // TODO: - Error Handling
+            state = .error(.generic)
         }
     }
 
     func didDisplay(item: CardItem) {
         guard !state.isLoadingNextPage,
+              !state.isLoading,
               !didReachLastPage,
               !isSearching,
               let itemIndex = state.value?.firstIndex(of: item),
@@ -93,5 +104,9 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     func toggleFavorite(item: CardItem) {
         guard let selectedBreed = breeds.first(where: { $0.id == item.id }) else { return }
         repository.toggleFavorite(breed: selectedBreed)
+    }
+
+    func getBreedModel(item: CardItem) -> Breed? {
+        return breeds.first(where: { $0.id == item.id })
     }
 }

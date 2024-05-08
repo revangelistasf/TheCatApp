@@ -9,6 +9,9 @@ import SwiftUI
 
 struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
     @StateObject private var viewModel: ViewModel
+    @Environment(\.dismissSearch) private var dismissSearch
+    @State var selectedCard: CardItem? = nil
+    @State var showingSheet = false
 
     private let gridItemLayout = Array(
         repeating: GridItem(.flexible(), spacing: Constants.padding, alignment: .top),
@@ -28,10 +31,6 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
         }
     }
 
-    init(viewModel: ViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
-
     var body: some View {
         NavigationView {
             ScrollView {
@@ -40,21 +39,48 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
                         CardItemView(cardItem: item) {
                             viewModel.toggleFavorite(item: item)
                         }
+                        .onTapGesture {
+                            self.selectedCard = item
+                            self.showingSheet = true
+                        }
                         .onAppear {
                             viewModel.didDisplay(item: item)
+                        }
+                        .onTapGesture {
+                            showingSheet.toggle()
                         }
                     }
                 }
                 .padding()
-                .onAppear {
-                    viewModel.start()
-                }
                 if viewModel.state.isLoadingNextPage, !viewModel.isSearching {
                     ProgressView()
                 }
             }
+            .stateView(shouldShowState: viewModel.state.isLoading) {
+                ProgressView()
+            }
+            .onAppear {
+                viewModel.start()
+            }
+            .stateView(shouldShowState: viewModel.state.isSuccess && itemsToDisplay.isEmpty) {
+                ErrorViewFactory.getErrorView(type: .noResults)
+            }
+            .searchable(text: $viewModel.searchTerm)
         }
-        .searchable(text: $viewModel.searchTerm)
+        .stateView(shouldShowState: viewModel.state.isError) {
+            ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic)
+        }
+        .sheet(isPresented: $showingSheet, onDismiss: {
+            selectedCard = nil
+        }, content: {
+            if let selectedCard = selectedCard, let model = viewModel.getBreedModel(item: selectedCard) {
+                BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: model))
+            }
+        })
+    }
+
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 }
 

@@ -9,7 +9,7 @@ import Foundation
 
 enum NetworkError: Error {
     case invalidResponse
-    case generic(Int)
+    case generic
     case clientError(Int)
     case serverError(Int)
 }

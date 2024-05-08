@@ -13,6 +13,7 @@ protocol BreedDetailsViewModelProtocol: ObservableObject {
     var temperament: String { get }
     var description: String { get }
     var imageUrl: URL? { get }
+    var isFavorite: Bool { get }
 }
 
 final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
@@ -36,6 +37,10 @@ final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
 
     var description: String {
         selectedBreed.description
+    }
+
+    var isFavorite: Bool {
+        selectedBreed.isFavorite
     }
 
     init(selectedBreed: Breed) {
