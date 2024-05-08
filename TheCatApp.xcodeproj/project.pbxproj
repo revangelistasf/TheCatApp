@@ -38,6 +38,7 @@
 		84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */; };
 		84E2EAF72BEB7B3F004CEC50 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EAF62BEB7B3F004CEC50 /* RepositoryTests.swift */; };
 		84E2EB022BEB8CA1004CEC50 /* Breed+Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB012BEB8CA1004CEC50 /* Breed+Fixture.swift */; };
+		84E2EB052BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB042BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift */; };
 		84E4862B2BE9922600A8F156 /* TheCatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E486292BE9922600A8F156 /* TheCatApp.xcdatamodeld */; };
 		84E486312BE993DE00A8F156 /* BreedPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E486302BE993DE00A8F156 /* BreedPersistence.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		84E2EAF42BEB7B3F004CEC50 /* TheCatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E2EAF62BEB7B3F004CEC50 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		84E2EB012BEB8CA1004CEC50 /* Breed+Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breed+Fixture.swift"; sourceTree = "<group>"; };
+		84E2EB042BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCast+AsyncAwait.swift"; sourceTree = "<group>"; };
 		84E4862A2BE9922600A8F156 /* TheCatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheCatApp.xcdatamodel; sourceTree = "<group>"; };
 		84E486302BE993DE00A8F156 /* BreedPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedPersistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -316,6 +318,7 @@
 		84E2EAF52BEB7B3F004CEC50 /* TheCatAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				84E2EB032BEBBC62004CEC50 /* Helpers */,
 				84E2EB002BEB8C86004CEC50 /* Fixtures */,
 				84E2EAF62BEB7B3F004CEC50 /* RepositoryTests.swift */,
 			);
@@ -328,6 +331,14 @@
 				84E2EB012BEB8CA1004CEC50 /* Breed+Fixture.swift */,
 			);
 			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		84E2EB032BEBBC62004CEC50 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				84E2EB042BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		84E486282BE9920500A8F156 /* CoreData */ = {
@@ -487,6 +498,7 @@
 			files = (
 				84E2EB022BEB8CA1004CEC50 /* Breed+Fixture.swift in Sources */,
 				84E2EAF72BEB7B3F004CEC50 /* RepositoryTests.swift in Sources */,
+				84E2EB052BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,7 +565,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -610,7 +622,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -642,9 +654,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.revangelista.TheCatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -670,9 +686,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.revangelista.TheCatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -683,6 +703,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.revangelista.TheCatAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -700,6 +721,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.revangelista.TheCatAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
