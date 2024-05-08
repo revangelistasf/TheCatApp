@@ -27,6 +27,7 @@ Creating this using MVVM architecture, SwiftUI, UnitTests, and Offline Functiona
 - Pagination from the Breed List View to make request 10 by 10
 - Error factory view to create views based on throwable errors
 - Create a small structure to make requests just creating new `Endpoints`
+- Use NukeUI to cached the image requests.
 
 ## Prerequisites
 - iPhone or Simulator running iOS 16.0 or later
