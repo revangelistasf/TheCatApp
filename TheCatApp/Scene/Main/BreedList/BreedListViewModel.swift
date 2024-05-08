@@ -48,7 +48,6 @@ final class BreedListViewModel: BreedListViewModelProtocol {
         }
     }
 
-
     @MainActor
     func fetchBreeds(page: Int = 0) async {
         do {
