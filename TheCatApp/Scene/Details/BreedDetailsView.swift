@@ -31,7 +31,7 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
                         .padding()
                 }
 
-                FavoriteButton(isFavorite: false, favoriteStyle: .details)
+                FavoriteButton(isFavorite: viewModel.isFavorite, favoriteStyle: .details)
                     .padding()
             }
             VStack(spacing: 16) {
@@ -47,7 +47,10 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
             .padding(.horizontal)
             Spacer()
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
+
+    @State private var showTabBar = true
 }
 
 private enum Constants {

@@ -11,6 +11,7 @@ protocol FavoritesViewModelProtocol: ObservableObject {
     var state: ViewState<[CardItem], ErrorViewType> { get }
     func start()
     func toggleFavorite(item: CardItem)
+    func getBreedModel(item: CardItem) -> Breed?
 }
 
 final class FavoritesViewModel: FavoritesViewModelProtocol {
@@ -51,5 +52,9 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
         guard let selectedBreed = breeds.first(where: { $0.id == item.id }) else { return }
         repository.toggleFavorite(breed: selectedBreed)
         fetchFavoriteBreeds()
+    }
+
+    func getBreedModel(item: CardItem) -> Breed? {
+        return breeds.first(where: { $0.id == item.id })
     }
 }
