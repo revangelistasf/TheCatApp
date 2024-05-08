@@ -78,13 +78,6 @@ final class RepositoryTests: XCTestCase {
     }
 }
 
-extension Array where Element: Encodable {
-    func jsonData() -> Data? {
-        let encoder = JSONEncoder()
-        return try? encoder.encode(self)
-    }
-}
-
 extension RepositoryTests {
     class MockNetworkService: NetworkServiceProtocol {
         var onRequest: ((_ endpoint: Endpoint) async throws -> Data)?
