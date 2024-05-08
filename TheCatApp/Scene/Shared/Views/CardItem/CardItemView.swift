@@ -8,11 +8,13 @@
 import SwiftUI
 
 private enum Constants {
-    static let imageAspectRatio: CGFloat = 1
+    static let imageHeight: CGFloat = 150
+    static let imageAspectRatio: CGFloat = 150
     static let cardCornerRadius: CGFloat = 20
     static let cardBorderWidth: CGFloat = 1
     static let titleTextHeight: CGFloat = 50
     static let titleLineLimit: Int = 2
+    static let buttonPadding: CGFloat = 8
 }
 
 struct CardItemView: View {
@@ -20,31 +22,33 @@ struct CardItemView: View {
     var action: (() -> Void)?
 
     var body: some View {
-        VStack {
-            ZStack(alignment: .topTrailing) {
+        ZStack(alignment: .topTrailing) {
+            VStack {
                 AsyncImage(url: cardItem.imageUrl) { image in
                     image.resizable()
-                        .aspectRatio(1, contentMode: .fit)
+                        .clipped()
                 } placeholder: {
                     Image(systemName: "cat.circle.fill")
                         .resizable()
-                        .aspectRatio(Constants.imageAspectRatio, contentMode: .fill)
                         .padding()
                 }
-                FavoriteButton(isFavorite: cardItem.isFavorite) {
-                    action?()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: .infinity)
+                .frame(height: Constants.imageHeight)
+                Spacer()
+                Text(cardItem.title)
+                    .lineLimit(Constants.titleLineLimit)
+                    .bold()
+                    .padding()
+                if let description = cardItem.description {
+                    Text(description)
+                    .padding()
                 }
-                .padding(8)
             }
-            Text(cardItem.title)
-                .lineLimit(Constants.titleLineLimit)
-                .frame(height: Constants.titleTextHeight)
-                .padding()
-            if let description = cardItem.description {
-                Text(description)
-                .padding()
+            FavoriteButton(isFavorite: cardItem.isFavorite) {
+                action?()
             }
-            Spacer()
+            .padding(Constants.buttonPadding)
         }
         .clipShape(RoundedRectangle(cornerRadius: Constants.cardCornerRadius))
         .overlay(
