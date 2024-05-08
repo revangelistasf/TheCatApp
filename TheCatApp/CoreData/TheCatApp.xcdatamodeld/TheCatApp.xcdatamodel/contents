@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="BreedPersistenceModel" representedClassName="BreedPersistenceModel" syncable="YES">
+        <attribute name="breedDescription" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isFavorite" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="lifeSpan" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="origin" attributeType="String"/>
+        <attribute name="referenceImageId" optional="YES" attributeType="String"/>
+        <attribute name="temperament" attributeType="String"/>
+    </entity>
+    <entity name="Favorites" representedClassName="Favorites" syncable="YES">
+        <attribute name="idx" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer"/>
+    </entity>
+</model>

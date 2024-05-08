@@ -1,5 +1,5 @@
 //
-//  RequestMethod.swift
+//  Configs.swift
 //  TheCatApp
 //
 //  Created by revangelista on 03/05/2024.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum RequestMethod: String {
-    case get = "GET"
+struct Configs {
+    static let apiKey: String = ""
 }
