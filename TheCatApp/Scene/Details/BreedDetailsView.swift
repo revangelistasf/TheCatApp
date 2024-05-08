@@ -15,39 +15,40 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
     }
 
     var body: some View {
-        VStack {
-            ZStack(alignment: .topTrailing) {
-                AsyncImage(url: viewModel.imageUrl) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: Constants.imageHeight, alignment: .top)
-                        .clipShape(.rect(cornerRadius: Constants.imageCornerRadius))
-                } placeholder: {
-                    Image(systemName: "cat.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(height: Constants.imageHeight, alignment: .top)
+        ScrollView {
+            VStack {
+                ZStack(alignment: .topTrailing) {
+                    AsyncImage(url: viewModel.imageUrl) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: Constants.imageHeight, alignment: .top)
+                    } placeholder: {
+                        Image(systemName: "cat.circle.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: Constants.imageHeight, alignment: .top)
+                            .padding()
+                    }
+
+                    FavoriteButton(isFavorite: viewModel.isFavorite, favoriteStyle: .details) {
+                        viewModel.toggleFavorite()
+                    }
                         .padding()
                 }
-
-                FavoriteButton(isFavorite: viewModel.isFavorite, favoriteStyle: .details) {
-                    viewModel.toggleFavorite()
+                VStack(spacing: 16) {
+                    Text(viewModel.title)
+                        .font(.title)
+                        .lineLimit(2)
+                        .foregroundColor(.titleText)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    TitleWithParagraphView(viewModel: .init(title: "Origin", description: viewModel.origin))
+                    TitleWithParagraphView(viewModel: .init(title: "Temperament",description: viewModel.temperament))
+                    TitleWithParagraphView(viewModel: .init(title: "Description", description: viewModel.description))
                 }
-                    .padding()
+                .padding(.horizontal)
+                Spacer()
             }
-            VStack(spacing: 16) {
-                Text(viewModel.title)
-                    .font(.title)
-                    .lineLimit(2)
-                    .foregroundColor(.titleText)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                TitleWithParagraphView(viewModel: .init(title: "Origin", description: viewModel.origin))
-                TitleWithParagraphView(viewModel: .init(title: "Temperament",description: viewModel.temperament))
-                TitleWithParagraphView(viewModel: .init(title: "Description", description: viewModel.description))
-            }
-            .padding(.horizontal)
-            Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
     }
