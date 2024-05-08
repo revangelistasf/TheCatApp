@@ -47,7 +47,12 @@ enum ErrorViewFactory {
         case .emptyFavorites:
             return ErrorModel(image: .sadCat, title: "No favorites added yet.")
         case .noResults:
-            return ErrorModel(image: .angryCat, title: "No results.")
+            return ErrorModel(
+                image: .angryCat,
+                title: "No results.",
+                buttonTitle: "Try Again",
+                action: action
+            )
         case .failedToFetchPersistenceData:
             return ErrorModel(
                 image: .sadCat,
