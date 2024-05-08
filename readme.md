@@ -2,11 +2,15 @@
 It's an iOS application developed in Swift, to fetch a list of cat breeds from [TheCatAPI](https://thecatapi.com/) and displays then, and be able to save them as favorites, to have them offline.
 
 ## Summary
+ - [Version Control](#version-control)
  - [Problem Description](#problem-description)
  - [Solution](#solution)
  - [Prerequisites](#prerequisites)
  - [Trade-offs](#trade-offs)
- - [Improvements](improvements)
+ - [Improvements](#improvements)
+ 
+## Version Control
+Normally I used Squash to merge my features in the core branches, but I let all the commits on the squash name, also I'll not delete any of my feature branches.
  
 ## Problem Description
 An application using Swift, that utilises [TheCatAPI](https://thecatapi.com/) to fetch a list of cat breeds.
