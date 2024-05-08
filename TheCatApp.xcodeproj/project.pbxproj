@@ -38,7 +38,10 @@
 		84BFD65D2BE944A300A5346A /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BFD65C2BE944A300A5346A /* FavoritesViewModel.swift */; };
 		84E2EAF72BEB7B3F004CEC50 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EAF62BEB7B3F004CEC50 /* RepositoryTests.swift */; };
 		84E2EB022BEB8CA1004CEC50 /* Breed+Fixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB012BEB8CA1004CEC50 /* Breed+Fixture.swift */; };
-		84E2EB052BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB042BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift */; };
+		84E2EB082BEBD869004CEC50 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB072BEBD869004CEC50 /* Array+Ext.swift */; };
+		84E2EB0A2BEBD916004CEC50 /* BreedListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB092BEBD916004CEC50 /* BreedListViewModelTests.swift */; };
+		84E2EB0D2BEBDB5A004CEC50 /* MockedNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB0C2BEBDB5A004CEC50 /* MockedNetworkService.swift */; };
+		84E2EB0F2BEBDB79004CEC50 /* MockedPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2EB0E2BEBDB79004CEC50 /* MockedPersistenceService.swift */; };
 		84E4862B2BE9922600A8F156 /* TheCatApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E486292BE9922600A8F156 /* TheCatApp.xcdatamodeld */; };
 		84E486312BE993DE00A8F156 /* BreedPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E486302BE993DE00A8F156 /* BreedPersistence.swift */; };
 /* End PBXBuildFile section */
@@ -87,7 +90,10 @@
 		84E2EAF42BEB7B3F004CEC50 /* TheCatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheCatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E2EAF62BEB7B3F004CEC50 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		84E2EB012BEB8CA1004CEC50 /* Breed+Fixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breed+Fixture.swift"; sourceTree = "<group>"; };
-		84E2EB042BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCast+AsyncAwait.swift"; sourceTree = "<group>"; };
+		84E2EB072BEBD869004CEC50 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		84E2EB092BEBD916004CEC50 /* BreedListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedListViewModelTests.swift; sourceTree = "<group>"; };
+		84E2EB0C2BEBDB5A004CEC50 /* MockedNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedNetworkService.swift; sourceTree = "<group>"; };
+		84E2EB0E2BEBDB79004CEC50 /* MockedPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedPersistenceService.swift; sourceTree = "<group>"; };
 		84E4862A2BE9922600A8F156 /* TheCatApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TheCatApp.xcdatamodel; sourceTree = "<group>"; };
 		84E486302BE993DE00A8F156 /* BreedPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedPersistence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -318,9 +324,11 @@
 		84E2EAF52BEB7B3F004CEC50 /* TheCatAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				84E2EB0B2BEBDB4F004CEC50 /* Data */,
+				84E2EB062BEBD83E004CEC50 /* Scene */,
 				84E2EB032BEBBC62004CEC50 /* Helpers */,
 				84E2EB002BEB8C86004CEC50 /* Fixtures */,
-				84E2EAF62BEB7B3F004CEC50 /* RepositoryTests.swift */,
+				84E2EB092BEBD916004CEC50 /* BreedListViewModelTests.swift */,
 			);
 			path = TheCatAppTests;
 			sourceTree = "<group>";
@@ -336,9 +344,26 @@
 		84E2EB032BEBBC62004CEC50 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				84E2EB042BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift */,
+				84E2EB072BEBD869004CEC50 /* Array+Ext.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		84E2EB062BEBD83E004CEC50 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		84E2EB0B2BEBDB4F004CEC50 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				84E2EAF62BEB7B3F004CEC50 /* RepositoryTests.swift */,
+				84E2EB0C2BEBDB5A004CEC50 /* MockedNetworkService.swift */,
+				84E2EB0E2BEBDB79004CEC50 /* MockedPersistenceService.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		84E486282BE9920500A8F156 /* CoreData */ = {
@@ -496,9 +521,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E2EB0D2BEBDB5A004CEC50 /* MockedNetworkService.swift in Sources */,
+				84E2EB0F2BEBDB79004CEC50 /* MockedPersistenceService.swift in Sources */,
+				84E2EB0A2BEBD916004CEC50 /* BreedListViewModelTests.swift in Sources */,
 				84E2EB022BEB8CA1004CEC50 /* Breed+Fixture.swift in Sources */,
+				84E2EB082BEBD869004CEC50 /* Array+Ext.swift in Sources */,
 				84E2EAF72BEB7B3F004CEC50 /* RepositoryTests.swift in Sources */,
-				84E2EB052BEBBC6A004CEC50 /* XCTestCast+AsyncAwait.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

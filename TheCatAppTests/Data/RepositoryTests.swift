@@ -7,17 +7,16 @@
 
 import XCTest
 @testable import TheCatApp
-import CoreData
 
 final class RepositoryTests: XCTestCase {
-    private var mockedNetworkService: MockNetworkService!
-    private var mockedPersistenceService: MockPersistenceService!
-    private var sut: BreedRepositoryProtocol!
+    private var mockedNetworkService: MockedNetworkService!
+    private var mockedPersistenceService: MockedPersistenceService!
+    private var sut: BreedRepository!
 
     override func setUp() {
         super.setUp()
-        mockedNetworkService = MockNetworkService()
-        mockedPersistenceService = MockPersistenceService()
+        mockedNetworkService = MockedNetworkService()
+        mockedPersistenceService = MockedPersistenceService()
         sut = BreedRepository(networkService: mockedNetworkService, persistenceService: mockedPersistenceService)
     }
 
@@ -45,14 +44,19 @@ final class RepositoryTests: XCTestCase {
 
     func test_fetchBreeds_doesReturnCorrectResult() {
         let mockedData = [Breed.fixture()]
-        mockedNetworkService.onRequest = { _ in
-            return mockedData.jsonData()!
-        }
 
-        runAsyncTest {
+        let expectation = expectation(description: "waiting")
+        Task {
+            mockedNetworkService.onRequest = { _ in
+                return mockedData.jsonData()!
+            }
+
             let response = try await self.sut.fetchBreeds(page: 0)
             XCTAssertEqual(mockedData, response)
+            expectation.fulfill()
         }
+
+        wait(for: [expectation], timeout: 1)
     }
 
     func test_fetchBreeds_doesReturnCorrectFavoritedResult() throws {
@@ -62,10 +66,14 @@ final class RepositoryTests: XCTestCase {
         }
         try mockedPersistenceService.addFavorite(breed: Breed.fixture())
 
-        runAsyncTest {
+        let expectation = expectation(description: "waiting")
+        Task {
             let response = try await self.sut.fetchBreeds(page: 0)
             XCTAssertTrue(response.first?.isFavorite ?? false)
+            expectation.fulfill()
         }
+
+        wait(for: [expectation], timeout: 1)
     }
 
     func test_toggleFavorite_souldChangePropertyAndAddToDatabase() {
@@ -75,50 +83,5 @@ final class RepositoryTests: XCTestCase {
         XCTAssertEqual(mockedPersistenceService.favorites.count, 1)
         sut.toggleFavorite(breed: mockedData)
         XCTAssertEqual(mockedPersistenceService.favorites.count, 0)
-    }
-}
-
-extension RepositoryTests {
-    class MockNetworkService: NetworkServiceProtocol {
-        var onRequest: ((_ endpoint: Endpoint) async throws -> Data)?
-        func request(_ endpoint: Endpoint) async throws -> Data {
-            guard let request = try await onRequest?(endpoint) else { throw NetworkError.invalidResponse }
-            return request
-        }
-    }
-
-    class MockPersistenceService: BreedPersistenceProtocol {
-        var favorites: [BreedPersistenceModel] = []
-        var successRequest: Bool = true
-
-        func fetchFavorites() throws -> [BreedPersistenceModel] {
-            if successRequest {
-                favorites
-            } else {
-                throw PersistenceError.failedToFetch
-            }
-        }
-        
-        func addFavorite(breed: Breed) throws {
-            let persistenceModel = BreedPersistenceModel(breed: breed, context: persistentContainer.viewContext)
-            favorites.append(persistenceModel)
-        }
-        
-        func removeFavorite(index: String) throws {
-            favorites.removeAll(where: { $0.id == index} )
-        }
-
-        lazy var persistentContainer: NSPersistentContainer = {
-            let description = NSPersistentStoreDescription()
-            description.url = URL(fileURLWithPath: "/dev/null")
-            let container = NSPersistentContainer(name: "TheCatApp")
-            container.persistentStoreDescriptions = [description]
-            container.loadPersistentStores { _, error in
-                if let error = error as NSError? {
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
-                }
-            }
-            return container
-        }()
     }
 }
