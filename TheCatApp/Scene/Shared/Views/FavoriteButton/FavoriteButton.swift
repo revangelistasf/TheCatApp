@@ -14,8 +14,8 @@ enum FavoriteTypeStyle {
 
 struct FavoriteButton: View {
     @State var isFavorite: Bool
-    var action: (() -> Void)?
     var favoriteStyle: FavoriteTypeStyle = .innerCard
+    var action: (() -> Void)?
 
     var size: CGFloat {
         switch favoriteStyle {
