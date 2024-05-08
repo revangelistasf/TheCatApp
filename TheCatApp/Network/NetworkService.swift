@@ -48,7 +48,7 @@ final class NetworkService: NetworkServiceProtocol {
         case 500...599:
             throw NetworkError.serverError(httpUrlResponse.statusCode)
         default:
-            throw NetworkError.generic(httpUrlResponse.statusCode)
+            throw NetworkError.generic
         }
     }
 }

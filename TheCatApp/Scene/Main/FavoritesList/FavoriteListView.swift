@@ -37,25 +37,14 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
                 .padding()
             }
             .stateView(shouldShowState: itemsToDisplay.isEmpty) {
-                emptyStateView
+                ErrorViewFactory.getErrorView(type: .emptyFavorites)
             }
         }
         .onAppear {
             viewModel.start()
         }
-    }
-
-    var emptyStateView: some View {
-        VStack(alignment: .center) {
-            Spacer()
-            Image(.sadCat)
-                .resizable()
-                .frame(width: Constants.emptyStateImageSize, height: Constants.emptyStateImageSize)
-            Text("No favorites added yet.")
-                .font(.title)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.titleText)
-            Spacer()
+        .stateView(shouldShowState: viewModel.state.isError) {
+            ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic, action: viewModel.start)
         }
     }
 

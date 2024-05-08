@@ -46,15 +46,24 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
                     }
                 }
                 .padding()
-                .onAppear {
-                    viewModel.start()
-                }
                 if viewModel.state.isLoadingNextPage, !viewModel.isSearching {
                     ProgressView()
                 }
             }
+            .stateView(shouldShowState: viewModel.state.isLoading) {
+                ProgressView()
+            }
+            .onAppear {
+                viewModel.start()
+            }
+            .stateView(shouldShowState: viewModel.state.isSuccess && itemsToDisplay.isEmpty) {
+                ErrorViewFactory.getErrorView(type: .noResults)
+            }
         }
         .searchable(text: $viewModel.searchTerm)
+        .stateView(shouldShowState: viewModel.state.isError) {
+            ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic)
+        }
     }
 }
 

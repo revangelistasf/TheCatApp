@@ -8,13 +8,13 @@
 import Foundation
 
 protocol FavoritesViewModelProtocol: ObservableObject {
-    var state: ViewState<[CardItem], Error> { get }
+    var state: ViewState<[CardItem], ErrorViewType> { get }
     func start()
     func toggleFavorite(item: CardItem)
 }
 
 final class FavoritesViewModel: FavoritesViewModelProtocol {
-    @Published private(set)var state: ViewState<[CardItem], Error>
+    @Published private(set)var state: ViewState<[CardItem], ErrorViewType>
     private var repository: BreedRepositoryProtocol
     private var breeds: [Breed] = []
 
@@ -28,12 +28,23 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
     }
 
     private func fetchFavoriteBreeds() {
-        self.state = .loading
-        self.breeds = repository.fetchAllFavorites()
-        let cards = self.breeds.map {
-            CardItem(id: $0.id, title: $0.name, description: $0.lifeSpan, imageUrl: $0.imageUrl, isFavorite: $0.isFavorite)
+        do {
+            self.state = .loading
+            self.breeds = try repository.fetchAllFavorites()
+            let cards = self.breeds.map {
+                CardItem(
+                    id: $0.id,
+                    title: $0.name,
+                    description: $0.lifeSpan,
+                    imageUrl: $0.imageUrl,
+                    isFavorite: $0.isFavorite
+                )
+            }
+            state = .success(cards)
+        } catch {
+            // In that case I'll let this as is, because I've mapped only this error
+            state = .error(.failedToFetchPersistenceData)
         }
-        state = .success(cards)
     }
 
     func toggleFavorite(item: CardItem) {

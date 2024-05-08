@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum ViewState<Value, Error> {
+enum ViewState<Value, StateError: Error> {
     case idle
     case loading
     case loadingNextPage(Value)
     case success(Value)
-    case error(Error)
+    case error(StateError)
 }
 
 extension ViewState {
@@ -25,11 +25,44 @@ extension ViewState {
         }
     }
 
+    var error: StateError? {
+        if case .error(let stateError) = self {
+            return stateError
+        }
+
+        return nil
+    }
+
+    var isLoading: Bool {
+        if case .loading = self {
+            return true
+        }
+
+        return false
+    }
+
     var isLoadingNextPage: Bool {
         if case .loadingNextPage = self {
             return true
         }
 
         return false
+    }
+
+    var isError: Bool {
+        if case .error = self {
+            return true
+        }
+
+        return false
+    }
+
+    var isSuccess: Bool {
+        switch self {
+        case .success, .loadingNextPage:
+            return true
+        default:
+            return false
+        }
     }
 }
