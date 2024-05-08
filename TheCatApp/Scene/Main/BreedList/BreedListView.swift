@@ -10,8 +10,6 @@ import SwiftUI
 struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
     @StateObject private var viewModel: ViewModel
     @Environment(\.dismissSearch) private var dismissSearch
-    @State var selectedCard: CardItem? = nil
-    @State var showingSheet = false
 
     private let gridItemLayout = Array(
         repeating: GridItem(.flexible(), spacing: Constants.padding, alignment: .top),
@@ -35,19 +33,19 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: Constants.padding) {
-                    ForEach(itemsToDisplay, id: \.uuid) { item in
-                        CardItemView(cardItem: item) {
-                            viewModel.toggleFavorite(item: item)
+                    ForEach(itemsToDisplay, id: \.id) { item in
+                        NavigationLink {
+                            if let model = viewModel.getBreedModel(item: item) {
+                                BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: model))
+                            }
+                        } label: {
+                            CardItemView(cardItem: item) {
+                                viewModel.toggleFavorite(item: item)
+                            }
                         }
-                        .onTapGesture {
-                            self.selectedCard = item
-                            self.showingSheet = true
-                        }
+                        .buttonStyle(PlainButtonStyle())
                         .onAppear {
                             viewModel.didDisplay(item: item)
-                        }
-                        .onTapGesture {
-                            showingSheet.toggle()
                         }
                     }
                 }
@@ -68,15 +66,8 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
             .searchable(text: $viewModel.searchTerm)
         }
         .stateView(shouldShowState: viewModel.state.isError) {
-            ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic)
+            ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic, action: viewModel.start)
         }
-        .sheet(isPresented: $showingSheet, onDismiss: {
-            selectedCard = nil
-        }, content: {
-            if let selectedCard = selectedCard, let model = viewModel.getBreedModel(item: selectedCard) {
-                BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: model))
-            }
-        })
     }
 
     init(viewModel: ViewModel) {

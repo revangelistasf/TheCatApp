@@ -11,7 +11,7 @@ struct TitleWithParagraphView: View {
     let viewModel: TitleWithParagraphViewModel
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: Constants.innerSpacing) {
             Text(viewModel.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.title2)
@@ -21,5 +21,9 @@ struct TitleWithParagraphView: View {
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+
+    private enum Constants {
+        static let innerSpacing: CGFloat = 8
     }
 }
