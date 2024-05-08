@@ -14,10 +14,12 @@ protocol BreedDetailsViewModelProtocol: ObservableObject {
     var description: String { get }
     var imageUrl: URL? { get }
     var isFavorite: Bool { get }
+    func toggleFavorite()
 }
 
 final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
-    private var selectedBreed: Breed
+    @Published private var selectedBreed: Breed
+    private var repository: BreedRepositoryProtocol
 
     var imageUrl: URL? {
         selectedBreed.imageUrl
@@ -43,7 +45,12 @@ final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
         selectedBreed.isFavorite
     }
 
-    init(selectedBreed: Breed) {
+    init(selectedBreed: Breed, repository: BreedRepositoryProtocol = BreedRepository()) {
         self.selectedBreed = selectedBreed
+        self.repository = repository
+    }
+
+    func toggleFavorite() {
+        repository.toggleFavorite(breed: selectedBreed)
     }
 }

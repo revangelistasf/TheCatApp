@@ -31,7 +31,9 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
                         .padding()
                 }
 
-                FavoriteButton(isFavorite: viewModel.isFavorite, favoriteStyle: .details)
+                FavoriteButton(isFavorite: viewModel.isFavorite, favoriteStyle: .details) {
+                    viewModel.toggleFavorite()
+                }
                     .padding()
             }
             VStack(spacing: 16) {
