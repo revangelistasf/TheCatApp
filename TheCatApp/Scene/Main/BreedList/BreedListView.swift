@@ -66,7 +66,7 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
             .searchable(text: $viewModel.searchTerm)
         }
         .stateView(shouldShowState: viewModel.state.isError) {
-            ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic)
+            ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic, action: viewModel.start)
         }
     }
 
