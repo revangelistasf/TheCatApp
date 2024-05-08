@@ -46,9 +46,9 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
             .stateView(shouldShowState: itemsToDisplay.isEmpty) {
                 ErrorViewFactory.getErrorView(type: .emptyFavorites)
             }
-        }
-        .onAppear {
-            viewModel.start()
+            .onAppear {
+                viewModel.start()
+            }
         }
         .stateView(shouldShowState: viewModel.state.isError) {
             ErrorViewFactory.getErrorView(type: viewModel.state.error ?? .generic, action: viewModel.start)
