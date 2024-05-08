@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
     @StateObject private var viewModel: ViewModel
@@ -18,13 +19,15 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
         ScrollView {
             VStack {
                 ZStack(alignment: .topTrailing) {
-                    AsyncImage(url: viewModel.imageUrl) { image in
-                        image
-                            .resizable()
-                    } placeholder: {
-                        Image(systemName: "cat.circle.fill")
-                            .resizable()
-                            .padding()
+                    LazyImage(url: viewModel.imageUrl) { state in
+                        if let image = state.image {
+                            image.resizable()
+                                .clipped()
+                        } else {
+                            Image(systemName: "cat.circle.fill")
+                                .resizable()
+                                .padding()
+                        }
                     }
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity)
@@ -35,10 +38,10 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
                     }
                         .padding()
                 }
-                VStack(spacing: 16) {
+                VStack(spacing: Constants.textSpacing) {
                     Text(viewModel.title)
                         .font(.title)
-                        .lineLimit(2)
+                        .lineLimit(Constants.titleLineLimit)
                         .foregroundColor(.titleText)
                         .frame(maxWidth: .infinity, alignment: .center)
                     TitleWithParagraphView(viewModel: .init(title: "Origin", description: viewModel.origin))
@@ -51,11 +54,11 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
         }
         .navigationBarTitleDisplayMode(.inline)
     }
-
-    @State private var showTabBar = true
 }
 
 private enum Constants {
     static let imageHeight: CGFloat = 300
     static let imageCornerRadius: CGFloat = 20
+    static let textSpacing: CGFloat = 16
+    static let titleLineLimit: Int = 2
 }

@@ -25,6 +25,7 @@
 		8436B1582BE8086400A3C398 /* BreedDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8436B1572BE8086400A3C398 /* BreedDetailsViewModel.swift */; };
 		847019012BE6DA570009D39F /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847019002BE6DA570009D39F /* CardItem.swift */; };
 		847019062BE70ECB0009D39F /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847019052BE70ECB0009D39F /* ViewState.swift */; };
+		84940E742BEC11CA0055119E /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 84940E732BEC11CA0055119E /* NukeUI */; };
 		84B45F962BE7DA3800733192 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B45F952BE7DA3800733192 /* FavoriteButton.swift */; };
 		84B8897F2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8897D2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataClass.swift */; };
 		84B889802BEA59FB00341C4A /* BreedPersistenceModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8897E2BEA59FB00341C4A /* BreedPersistenceModel+CoreDataProperties.swift */; };
@@ -103,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84940E742BEC11CA0055119E /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +403,9 @@
 			dependencies = (
 			);
 			name = TheCatApp;
+			packageProductDependencies = (
+				84940E732BEC11CA0055119E /* NukeUI */,
+			);
 			productName = TheCatApp;
 			productReference = 841D5BC32BE4E4BE00C5EAB1 /* TheCatApp.app */;
 			productType = "com.apple.product-type.application";
@@ -451,6 +456,9 @@
 				Base,
 			);
 			mainGroup = 841D5BBA2BE4E4BE00C5EAB1;
+			packageReferences = (
+				84940E722BEC11CA0055119E /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = 841D5BC42BE4E4BE00C5EAB1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -791,6 +799,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		84940E722BEC11CA0055119E /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84940E732BEC11CA0055119E /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84940E722BEC11CA0055119E /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		84E486292BE9922600A8F156 /* TheCatApp.xcdatamodeld */ = {

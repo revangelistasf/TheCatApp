@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NukeUI
 
 private enum Constants {
     static let imageHeight: CGFloat = 150
@@ -25,13 +26,15 @@ struct CardItemView: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             VStack {
-                AsyncImage(url: cardItem.imageUrl) { image in
-                    image.resizable()
-                        .clipped()
-                } placeholder: {
-                    Image(systemName: "cat.circle.fill")
-                        .resizable()
-                        .padding()
+                LazyImage(url: cardItem.imageUrl) { state in
+                    if let image = state.image {
+                        image.resizable()
+                            .clipped()
+                    } else {
+                        Image(systemName: "cat.circle.fill")
+                            .resizable()
+                            .padding()
+                    }
                 }
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: .infinity)
