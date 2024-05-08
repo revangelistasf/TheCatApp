@@ -325,10 +325,9 @@
 			isa = PBXGroup;
 			children = (
 				84E2EB0B2BEBDB4F004CEC50 /* Data */,
-				84E2EB062BEBD83E004CEC50 /* Scene */,
-				84E2EB032BEBBC62004CEC50 /* Helpers */,
 				84E2EB002BEB8C86004CEC50 /* Fixtures */,
-				84E2EB092BEBD916004CEC50 /* BreedListViewModelTests.swift */,
+				84E2EB032BEBBC62004CEC50 /* Helpers */,
+				84E2EB062BEBD83E004CEC50 /* Scene */,
 			);
 			path = TheCatAppTests;
 			sourceTree = "<group>";
@@ -352,6 +351,7 @@
 		84E2EB062BEBD83E004CEC50 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				84E2EB092BEBD916004CEC50 /* BreedListViewModelTests.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
