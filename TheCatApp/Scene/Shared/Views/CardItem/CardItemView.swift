@@ -15,6 +15,7 @@ private enum Constants {
     static let titleTextHeight: CGFloat = 50
     static let titleLineLimit: Int = 2
     static let buttonPadding: CGFloat = 8
+    static let bottomSpacing: CGFloat = 8
 }
 
 struct CardItemView: View {
@@ -39,11 +40,14 @@ struct CardItemView: View {
                 Text(cardItem.title)
                     .lineLimit(Constants.titleLineLimit)
                     .bold()
-                    .padding()
-                if let description = cardItem.description {
-                    Text(description)
-                    .padding()
+                    .padding(.horizontal)
+                if let _ = cardItem.description, let lifeSpan = cardItem.averageLifeSpan {
+                    Text("Life Span: \(lifeSpan) y/o")
+                        .font(.subheadline)
+                    .padding(.horizontal)
                 }
+                Spacer()
+                    .frame(height: Constants.bottomSpacing)
             }
             FavoriteButton(isFavorite: cardItem.isFavorite) {
                 action?()
@@ -56,4 +60,5 @@ struct CardItemView: View {
                 .stroke(lineWidth: Constants.cardBorderWidth)
         )
     }
+
 }
