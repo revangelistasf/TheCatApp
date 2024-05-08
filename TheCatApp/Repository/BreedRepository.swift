@@ -55,12 +55,14 @@ final class BreedRepository: BreedRepositoryProtocol {
     func toggleFavorite(breed: Breed) {
         do {
             if breed.isFavorite {
+                breed.isFavorite = false
                 try persistenceService.removeFavorite(index: breed.id)
             } else {
                 breed.isFavorite = true
                 try persistenceService.addFavorite(breed: breed)
             }
         } catch {
+            // This error won't show anything to the user
             print(error.localizedDescription)
         }
 
