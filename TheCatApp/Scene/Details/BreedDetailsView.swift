@@ -57,7 +57,3 @@ private enum Constants {
     static let imageHeight: CGFloat = 300
     static let imageCornerRadius: CGFloat = 20
 }
-
-#Preview {
-    BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: .fixture()))
-}
