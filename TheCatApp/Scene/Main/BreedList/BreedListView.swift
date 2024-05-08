@@ -33,7 +33,7 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: Constants.padding) {
-                    ForEach(itemsToDisplay, id: \.uuid) { item in
+                    ForEach(itemsToDisplay, id: \.id) { item in
                         NavigationLink {
                             if let model = viewModel.getBreedModel(item: item) {
                                 BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: model))

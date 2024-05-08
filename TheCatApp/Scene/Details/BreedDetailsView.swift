@@ -21,15 +21,14 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
                     AsyncImage(url: viewModel.imageUrl) { image in
                         image
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: Constants.imageHeight, alignment: .top)
                     } placeholder: {
                         Image(systemName: "cat.circle.fill")
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: Constants.imageHeight, alignment: .top)
                             .padding()
                     }
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: Constants.imageHeight, alignment: .top)
 
                     FavoriteButton(isFavorite: viewModel.isFavorite, favoriteStyle: .details) {
                         viewModel.toggleFavorite()

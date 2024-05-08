@@ -44,7 +44,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
         currentPage = 0
         state = .loading
         Task {
-            await fetchBreeds()
+            await fetchBreeds(page: currentPage)
         }
     }
 
@@ -82,6 +82,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
         }
     }
 
+    @MainActor
     func didDisplay(item: CardItem) {
         guard !state.isLoadingNextPage,
               !state.isLoading,
@@ -92,9 +93,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
         else { return }
 
         Task {
-            await MainActor.run {
-                state = .loadingNextPage(state.value ?? [])
-            }
+            state = .loadingNextPage(state.value ?? [])
             await fetchBreeds(page: currentPage)
         }
 

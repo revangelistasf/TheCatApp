@@ -8,7 +8,6 @@
 import Foundation
 
 struct CardItem: Identifiable, Equatable {
-    let uuid = UUID()
     let id: String
     let title: String
     var description: String?
