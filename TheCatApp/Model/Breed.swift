@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Breed: Decodable {
+class Breed: Codable {
     let id: String
     let name: String
     let description: String
