@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol BreedDetailsViewModelProtocol: ObservableObject {
     var title: String { get }
@@ -18,7 +19,11 @@ protocol BreedDetailsViewModelProtocol: ObservableObject {
 }
 
 final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
-    @Published private var selectedBreed: Breed
+    @Published private var selectedBreed: Breed {
+        didSet {
+            print("new value setted")
+        }
+    }
     private var repository: BreedRepositoryProtocol
 
     var imageUrl: URL? {
@@ -43,10 +48,26 @@ final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
 
     @Published var isFavorite: Bool
 
+    var cancellable = Set<AnyCancellable>()
+
     init(selectedBreed: Breed, repository: BreedRepositoryProtocol = BreedRepository()) {
         self.selectedBreed = selectedBreed
         self.repository = repository
         self.isFavorite = selectedBreed.isFavorite
+
+        selectedBreed.$isFavorite
+            .dropFirst()
+            .sink { [weak self] value in
+                self?.isFavorite = value
+            }
+            .store(in: &cancellable)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshIsFavorite), name: .NSManagedObjectContextObjectsDidChange, object: nil)
+    }
+
+    @objc func refreshIsFavorite() {
+        selectedBreed.isFavorite = repository.isFavorite(id: selectedBreed.id)
+
     }
 
     func toggleFavorite() {

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class CardItem: Identifiable, Equatable, ObservableObject {
+class CardItem: Identifiable, ObservableObject {
     let id: String
     let title: String
     var description: String?
@@ -36,9 +36,18 @@ class CardItem: Identifiable, Equatable, ObservableObject {
             }
             .store(in: &cancellables)
     }
+}
 
+// MARK: - Equatable
+extension CardItem: Equatable {
     static func == (lhs: CardItem, rhs: CardItem) -> Bool {
         lhs.id == rhs.id
     }
+}
 
+// MARK: - Hashable
+extension CardItem: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

@@ -10,6 +10,7 @@ import Foundation
 protocol BreedRepositoryProtocol {
     func fetchBreeds(page: Int) async throws -> [Breed]
     func toggleFavorite(breed: Breed)
+    func isFavorite(id: String) -> Bool
     func fetchAllFavorites() throws -> [Breed]
 }
 
@@ -43,6 +44,10 @@ final class BreedRepository: BreedRepositoryProtocol {
         return breeds
     }
 
+    func isFavorite(id: String) -> Bool {
+        persistenceService.isFavorite(id: id)
+    }
+
     func fetchAllFavorites() throws -> [Breed] {
         do {
             let repoResult = try persistenceService.fetchFavorites()
@@ -65,6 +70,5 @@ final class BreedRepository: BreedRepositoryProtocol {
             // This error won't show anything to the user
             print(error.localizedDescription)
         }
-
     }
 }

@@ -54,6 +54,7 @@ class Breed: Codable, ObservableObject {
     }
 }
 
+// MARK: - Equatable
 extension Breed: Equatable {
     static func == (lhs: Breed, rhs: Breed) -> Bool {
         lhs.id == rhs.id

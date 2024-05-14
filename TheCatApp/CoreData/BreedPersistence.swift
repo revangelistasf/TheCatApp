@@ -11,6 +11,7 @@ protocol BreedPersistenceProtocol {
     func fetchFavorites() throws -> [BreedPersistenceModel]
     func addFavorite(breed: Breed) throws
     func removeFavorite(index: String) throws
+    func isFavorite(id: String) -> Bool
 }
 
 final class BreedPersistence: BreedPersistenceProtocol {
@@ -48,4 +49,13 @@ final class BreedPersistence: BreedPersistenceProtocol {
             try? context.save()
         }
     }
+
+    func isFavorite(id: String) -> Bool {
+        let request = BreedPersistenceModel.fetchRequest()
+        request.fetchLimit = 1
+        request.predicate = NSPredicate(format: "id == %@", id)
+        guard let result = try? context.count(for: request) else { return false }
+        return result > 0
+    }
 }
+

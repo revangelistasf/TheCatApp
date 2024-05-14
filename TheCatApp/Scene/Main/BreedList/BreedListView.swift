@@ -30,28 +30,29 @@ struct BreedListView<ViewModel: BreedListViewModelProtocol>: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: Constants.padding) {
                     ForEach(itemsToDisplay, id: \.id) { item in
-                        NavigationLink {
-                            if let model = viewModel.getBreedModel(item: item) {
-                                BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: model))
-                            }
-                        } label: {
+                        NavigationLink(value: item) {
                             CardItemView(cardItem: item) {
                                 viewModel.toggleFavorite(item: item)
                             }
+                            .onAppear {
+                                viewModel.didDisplay(item: item)
+                            }
                         }
                         .buttonStyle(PlainButtonStyle())
-                        .onAppear {
-                            viewModel.didDisplay(item: item)
-                        }
                     }
                 }
                 .padding()
                 if viewModel.state.isLoadingNextPage, !viewModel.isSearching {
                     ProgressView()
+                }
+            }
+            .navigationDestination(for: CardItem.self) { cardItem in
+                if let selectedBreed = viewModel.getBreedModel(item: cardItem) {
+                    BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: selectedBreed))
                 }
             }
             .stateView(shouldShowState: viewModel.state.isLoading) {

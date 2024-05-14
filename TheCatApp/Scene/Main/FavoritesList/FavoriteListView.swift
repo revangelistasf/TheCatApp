@@ -29,11 +29,7 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
             ScrollView {
                 LazyVGrid(columns: gridItemLayout, spacing: Constants.padding) {
                     ForEach(itemsToDisplay, id: \.id) { item in
-                        NavigationLink {
-                            if let model = viewModel.getBreedModel(item: item) {
-                                BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: model))
-                            }
-                        } label: {
+                        NavigationLink(value: item) {
                             CardItemView(cardItem: item) {
                                 viewModel.toggleFavorite(item: item)
                             }
@@ -42,6 +38,11 @@ struct FavoritesView<ViewModel: FavoritesViewModelProtocol>: View {
                     }
                 }
                 .padding()
+            }
+            .navigationDestination(for: CardItem.self) { cardItem in
+                if let selectedBreed = viewModel.getBreedModel(item: cardItem) {
+                    BreedDetailsView(viewModel: BreedDetailsViewModel(selectedBreed: selectedBreed))
+                }
             }
             .stateView(shouldShowState: itemsToDisplay.isEmpty) {
                 ErrorViewFactory.getErrorView(type: .emptyFavorites)
