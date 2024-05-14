@@ -13,7 +13,7 @@ enum FavoriteTypeStyle {
 }
 
 struct FavoriteButton: View {
-    @State var isFavorite: Bool
+    @Binding var isFavorite: Bool
     var favoriteStyle: FavoriteTypeStyle = .innerCard
     var action: (() -> Void)?
 
@@ -28,7 +28,6 @@ struct FavoriteButton: View {
 
     var body: some View {
         Button {
-            isFavorite.toggle()
             action?()
         } label: {
             Label("add to favorites", systemImage: Constants.imageName)
@@ -52,8 +51,8 @@ private enum Constants {
 
 #Preview {
     VStack {
-        FavoriteButton(isFavorite: true)
-        FavoriteButton(isFavorite: false)
+        FavoriteButton(isFavorite: .constant(true))
+        FavoriteButton(isFavorite: .constant(true))
     }
     .background(.black)
 }

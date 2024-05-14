@@ -15,15 +15,16 @@ struct MainView: View {
                     repository: BreedRepository()
                 )
             )
-                .tabItem {
-                    Label("Breed List", systemImage: "cat")
-                }
+            .tabItem {
+                Label("Breed List", systemImage: "cat")
+            }
+
             FavoritesView(
                 viewModel: FavoritesViewModel(repository: BreedRepository())
             )
-                .tabItem {
-                    Label("Favorites", systemImage: "star")
-                }
+            .tabItem {
+                Label("Favorites", systemImage: "star")
+            }
         }
     }
 }

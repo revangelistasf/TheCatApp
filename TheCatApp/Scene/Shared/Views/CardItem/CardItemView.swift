@@ -20,7 +20,7 @@ private enum Constants {
 }
 
 struct CardItemView: View {
-    let cardItem: CardItem
+    @StateObject var cardItem: CardItem
     var action: (() -> Void)?
 
     var body: some View {
@@ -39,7 +39,9 @@ struct CardItemView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: .infinity)
                 .frame(height: Constants.imageHeight)
+
                 Spacer()
+
                 Text(cardItem.title)
                     .lineLimit(Constants.titleLineLimit)
                     .bold()
@@ -49,10 +51,12 @@ struct CardItemView: View {
                         .font(.subheadline)
                     .padding(.horizontal)
                 }
+
                 Spacer()
                     .frame(height: Constants.bottomSpacing)
             }
-            FavoriteButton(isFavorite: cardItem.isFavorite) {
+
+            FavoriteButton(isFavorite: $cardItem.isFavorite) {
                 action?()
             }
             .padding(Constants.buttonPadding)
@@ -62,6 +66,13 @@ struct CardItemView: View {
             RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                 .stroke(lineWidth: Constants.cardBorderWidth)
         )
+    }
+
+    func averageLifeSpan(description: String?) -> String? {
+        let ages = description?.components(separatedBy: " - ").compactMap{ Int($0 )}
+        guard let sum = ages?.reduce(0, +), let size = ages?.count else { return nil }
+        let averageLifeSpan = Double(sum)/Double(size)
+        return String(format: "%.1f", averageLifeSpan)
     }
 
 }

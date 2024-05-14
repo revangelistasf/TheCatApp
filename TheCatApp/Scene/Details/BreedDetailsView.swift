@@ -33,7 +33,7 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: Constants.imageHeight, alignment: .top)
 
-                    FavoriteButton(isFavorite: viewModel.isFavorite, favoriteStyle: .details) {
+                    FavoriteButton(isFavorite: $viewModel.isFavorite, favoriteStyle: .details) {
                         viewModel.toggleFavorite()
                     }
                         .padding()

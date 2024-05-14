@@ -13,7 +13,7 @@ protocol BreedDetailsViewModelProtocol: ObservableObject {
     var temperament: String { get }
     var description: String { get }
     var imageUrl: URL? { get }
-    var isFavorite: Bool { get }
+    var isFavorite: Bool { get set }
     func toggleFavorite()
 }
 
@@ -41,13 +41,12 @@ final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
         selectedBreed.description
     }
 
-    var isFavorite: Bool {
-        selectedBreed.isFavorite
-    }
+    @Published var isFavorite: Bool
 
     init(selectedBreed: Breed, repository: BreedRepositoryProtocol = BreedRepository()) {
         self.selectedBreed = selectedBreed
         self.repository = repository
+        self.isFavorite = selectedBreed.isFavorite
     }
 
     func toggleFavorite() {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Breed: Codable {
+class Breed: Codable, ObservableObject {
     let id: String
     let name: String
     let description: String
@@ -15,7 +15,7 @@ class Breed: Codable {
     let temperament: String
     let referenceImageId: String?
     let lifeSpan: String
-    var isFavorite: Bool = false
+    @Published var isFavorite: Bool = false
 
     var imageUrl: URL? {
         URL(string: "https://cdn2.thecatapi.com/images/\(referenceImageId ?? "").jpg")

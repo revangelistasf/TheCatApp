@@ -33,14 +33,9 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
             self.state = .loading
             self.breeds = try repository.fetchAllFavorites()
             let cards = self.breeds.map {
-                CardItem(
-                    id: $0.id,
-                    title: $0.name,
-                    description: $0.lifeSpan,
-                    imageUrl: $0.imageUrl,
-                    isFavorite: $0.isFavorite
-                )
+                CardItem(breed: $0)
             }
+            
             state = .success(cards)
         } catch {
             // In that case I'll let this as is, because I've mapped only this error

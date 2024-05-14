@@ -42,6 +42,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
 
     func start() {
         currentPage = 0
+        self.breeds.removeAll()
         state = .loading
         Task {
             await fetchBreeds(page: currentPage)
@@ -55,13 +56,9 @@ final class BreedListViewModel: BreedListViewModelProtocol {
             self.breeds.append(contentsOf: result)
             var cardItems = state.value ?? []
             cardItems += result.map {
-                CardItem(
-                    id: $0.id,
-                    title: $0.name,
-                    imageUrl: $0.imageUrl,
-                    isFavorite: $0.isFavorite
-                )
+                CardItem(breed: $0)
             }
+
             if state.isLoadingNextPage, result.isEmpty {
                 // API didn't inform the page number, or total items, so I did it to prevent new requests
                 didReachLastPage = true
@@ -96,7 +93,6 @@ final class BreedListViewModel: BreedListViewModelProtocol {
             state = .loadingNextPage(state.value ?? [])
             await fetchBreeds(page: currentPage)
         }
-
     }
 
     func toggleFavorite(item: CardItem) {
