@@ -33,7 +33,7 @@ final class FavoritesViewModel: FavoritesViewModelProtocol {
             self.state = .loading
             self.breeds = try repository.fetchAllFavorites()
             let cards = self.breeds.map {
-                CardItem(breed: $0)
+                CardItem(breed: $0, shouldShowLifeSpan: true)
             }
             
             state = .success(cards)

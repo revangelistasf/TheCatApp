@@ -13,6 +13,7 @@ class CardItem: Identifiable, ObservableObject {
     let title: String
     var description: String?
     var imageUrl: URL?
+    var shouldShowLifeSpan: Bool
     @Published var isFavorite: Bool = false
 
     private var cancellables = Set<AnyCancellable>()
@@ -24,11 +25,13 @@ class CardItem: Identifiable, ObservableObject {
         return String(format: "%.1f", averageLifeSpan)
     }
 
-    init(breed: Breed) {
+    init(breed: Breed, shouldShowLifeSpan: Bool = false) {
         self.id = breed.id
         self.title = breed.name
+        self.description = breed.lifeSpan
         self.imageUrl = breed.imageUrl
         self.isFavorite = breed.isFavorite
+        self.shouldShowLifeSpan = shouldShowLifeSpan
 
         breed.$isFavorite
             .sink { [weak self] newValue in

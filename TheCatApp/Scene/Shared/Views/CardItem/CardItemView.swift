@@ -46,7 +46,7 @@ struct CardItemView: View {
                     .lineLimit(Constants.titleLineLimit)
                     .bold()
                     .padding(.horizontal)
-                if let _ = cardItem.description, let lifeSpan = cardItem.averageLifeSpan {
+                if cardItem.shouldShowLifeSpan, let lifeSpan = cardItem.averageLifeSpan {
                     Text("Life Span: \(lifeSpan) y/o")
                         .font(.subheadline)
                     .padding(.horizontal)
@@ -67,12 +67,4 @@ struct CardItemView: View {
                 .stroke(lineWidth: Constants.cardBorderWidth)
         )
     }
-
-    func averageLifeSpan(description: String?) -> String? {
-        let ages = description?.components(separatedBy: " - ").compactMap{ Int($0 )}
-        guard let sum = ages?.reduce(0, +), let size = ages?.count else { return nil }
-        let averageLifeSpan = Double(sum)/Double(size)
-        return String(format: "%.1f", averageLifeSpan)
-    }
-
 }
