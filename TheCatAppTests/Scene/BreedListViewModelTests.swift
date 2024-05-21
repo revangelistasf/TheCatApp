@@ -36,7 +36,7 @@ final class BreedListViewModelTests: XCTestCase {
 
     func test_fetchBreeds_doesCreateCardsWithCorrectValue() {
         let mockedBreed = Breed.fixture(id: "cardItemId", name: "cardItemName")
-        let mockedCardItem = CardItem(id: mockedBreed.id, title: mockedBreed.name)
+        let mockedCardItem = CardItem(breed: mockedBreed)
 
         let expectation = expectation(description: "waiting")
         Task {
@@ -121,5 +121,6 @@ extension BreedListViewModelTests {
 
         func fetchAllFavorites() throws -> [Breed] { return [] }
 
+        func isFavorite(id: String) -> Bool { return false }
     }
 }

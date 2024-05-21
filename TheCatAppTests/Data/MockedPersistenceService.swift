@@ -10,6 +10,19 @@ import Foundation
 @testable import TheCatApp
 
 class MockedPersistenceService: BreedPersistenceProtocol {
+    lazy var persistentContainer: NSPersistentContainer = {
+        let description = NSPersistentStoreDescription()
+        description.url = URL(fileURLWithPath: "/dev/null")
+        let container = NSPersistentContainer(name: "TheCatApp")
+        container.persistentStoreDescriptions = [description]
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+        return container
+    }()
+
     var favorites: [BreedPersistenceModel] = []
     var successRequest: Bool = true
 
@@ -30,16 +43,7 @@ class MockedPersistenceService: BreedPersistenceProtocol {
         favorites.removeAll(where: { $0.id == index} )
     }
 
-    lazy var persistentContainer: NSPersistentContainer = {
-        let description = NSPersistentStoreDescription()
-        description.url = URL(fileURLWithPath: "/dev/null")
-        let container = NSPersistentContainer(name: "TheCatApp")
-        container.persistentStoreDescriptions = [description]
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
+    func isFavorite(id: String) -> Bool {
+        favorites.contains(where: { $0.id == id })
+    }
 }
