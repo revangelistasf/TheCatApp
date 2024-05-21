@@ -39,10 +39,10 @@ struct FavoriteButton: View {
         .frame(width: size, height: size)
         .background(.white)
         .clipShape(Circle())
-        
     }
 }
 
+// MARK: - View Constants
 private enum Constants {
     static let imageName: String = "heart.fill"
     static let smallSize: CGFloat = 24

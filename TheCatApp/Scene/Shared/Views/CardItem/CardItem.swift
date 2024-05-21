@@ -8,14 +8,13 @@
 import Foundation
 import Combine
 
-class CardItem: Identifiable, ObservableObject {
+final class CardItem: Identifiable, ObservableObject {
+    @Published var isFavorite: Bool = false
     let id: String
     let title: String
     var description: String?
     var imageUrl: URL?
     var shouldShowLifeSpan: Bool
-    @Published var isFavorite: Bool = false
-
     private var cancellables = Set<AnyCancellable>()
 
     var averageLifeSpan: String? {

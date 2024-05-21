@@ -21,9 +21,9 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     @Published private(set)var state: ViewState<[CardItem], ErrorViewType>
     @Published var searchTerm: String = ""
     private var breeds: [Breed] = []
-
     private var currentPage: Int = 0
     private var didReachLastPage = false
+    let repository: BreedRepositoryProtocol
 
     private var paginationIndexThreshold: Int {
         Int(Double(state.value?.count ?? 0) * 0.8)
@@ -32,8 +32,6 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     var isSearching: Bool {
         !searchTerm.isEmpty
     }
-
-    let repository: BreedRepositoryProtocol
 
     init(repository: BreedRepositoryProtocol) {
         self.repository = repository

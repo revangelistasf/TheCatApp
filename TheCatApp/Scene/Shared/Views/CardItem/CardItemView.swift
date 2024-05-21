@@ -8,17 +8,6 @@
 import SwiftUI
 import NukeUI
 
-private enum Constants {
-    static let imageHeight: CGFloat = 150
-    static let imageAspectRatio: CGFloat = 150
-    static let cardCornerRadius: CGFloat = 20
-    static let cardBorderWidth: CGFloat = 1
-    static let titleTextHeight: CGFloat = 50
-    static let titleLineLimit: Int = 2
-    static let buttonPadding: CGFloat = 8
-    static let bottomSpacing: CGFloat = 8
-}
-
 struct CardItemView: View {
     @StateObject var cardItem: CardItem
     var action: (() -> Void)?
@@ -67,4 +56,16 @@ struct CardItemView: View {
                 .stroke(lineWidth: Constants.cardBorderWidth)
         )
     }
+}
+
+// MARK: - View Constants
+private enum Constants {
+    static let imageHeight: CGFloat = 150
+    static let imageAspectRatio: CGFloat = 150
+    static let cardCornerRadius: CGFloat = 20
+    static let cardBorderWidth: CGFloat = 1
+    static let titleTextHeight: CGFloat = 50
+    static let titleLineLimit: Int = 2
+    static let buttonPadding: CGFloat = 8
+    static let bottomSpacing: CGFloat = 8
 }

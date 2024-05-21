@@ -26,7 +26,7 @@ extension Endpoint {
 
     var header: [String: String]? {
         return [
-            "Content-Tye": "application/json"
+            "Content-Type": "application/json"
         ]
     }
 

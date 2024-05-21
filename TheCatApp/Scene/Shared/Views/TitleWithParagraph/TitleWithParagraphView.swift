@@ -22,8 +22,9 @@ struct TitleWithParagraphView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
+}
 
-    private enum Constants {
-        static let innerSpacing: CGFloat = 8
-    }
+// MARK: - View Constants
+private enum Constants {
+    static let innerSpacing: CGFloat = 8
 }

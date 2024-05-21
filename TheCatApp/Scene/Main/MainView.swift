@@ -10,11 +10,7 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         TabView {
-            BreedListView(
-                viewModel: BreedListViewModel(
-                    repository: BreedRepository()
-                )
-            )
+            BreedListView(viewModel: BreedListViewModel(repository: BreedRepository()))
             .tabItem {
                 Label("Breed List", systemImage: "cat")
             }

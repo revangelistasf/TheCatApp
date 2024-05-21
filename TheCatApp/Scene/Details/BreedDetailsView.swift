@@ -36,8 +36,9 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
                     FavoriteButton(isFavorite: $viewModel.isFavorite, favoriteStyle: .details) {
                         viewModel.toggleFavorite()
                     }
-                        .padding()
+                    .padding()
                 }
+
                 VStack(spacing: Constants.textSpacing) {
                     Text(viewModel.title)
                         .font(.title)
@@ -49,6 +50,7 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
                     TitleWithParagraphView(viewModel: .init(title: "Description", description: viewModel.description))
                 }
                 .padding(.horizontal)
+                
                 Spacer()
             }
         }
@@ -56,6 +58,7 @@ struct BreedDetailsView<ViewModel: BreedDetailsViewModelProtocol>: View {
     }
 }
 
+// MARK: - View Constants
 private enum Constants {
     static let imageHeight: CGFloat = 300
     static let imageCornerRadius: CGFloat = 20

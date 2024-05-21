@@ -24,7 +24,9 @@ final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
             print("new value setted")
         }
     }
+    @Published var isFavorite: Bool
     private var repository: BreedRepositoryProtocol
+    private var cancellable = Set<AnyCancellable>()
 
     var imageUrl: URL? {
         selectedBreed.imageUrl
@@ -46,15 +48,14 @@ final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
         selectedBreed.description
     }
 
-    @Published var isFavorite: Bool
-
-    var cancellable = Set<AnyCancellable>()
-
     init(selectedBreed: Breed, repository: BreedRepositoryProtocol = BreedRepository()) {
         self.selectedBreed = selectedBreed
         self.repository = repository
         self.isFavorite = selectedBreed.isFavorite
+        setupObservers()
+    }
 
+    private func setupObservers() {
         selectedBreed.$isFavorite
             .dropFirst()
             .sink { [weak self] value in
@@ -62,10 +63,15 @@ final class BreedDetailsViewModel: BreedDetailsViewModelProtocol {
             }
             .store(in: &cancellable)
 
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshIsFavorite), name: .NSManagedObjectContextObjectsDidChange, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(refreshIsFavorite),
+            name: .NSManagedObjectContextObjectsDidChange,
+            object: nil
+        )
     }
 
-    @objc func refreshIsFavorite() {
+    @objc private func refreshIsFavorite() {
         selectedBreed.isFavorite = repository.isFavorite(id: selectedBreed.id)
 
     }

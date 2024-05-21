@@ -32,9 +32,10 @@ struct ErrorView: View {
     init(model: ErrorModel) {
         self.model = model
     }
+}
 
-    private enum Constants {
-        static let imageSize: CGFloat = 100
-        static let innerSpacing: CGFloat = 16
-    }
+// MARK: - View Constants
+private enum Constants {
+    static let imageSize: CGFloat = 100
+    static let innerSpacing: CGFloat = 16
 }
